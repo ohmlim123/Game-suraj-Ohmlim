@@ -2,7 +2,8 @@
 #define GAME_H
 
 
-#include"GameState.h"
+
+#include"MainMenuState.h"
 
 
 

@@ -1,30 +1,35 @@
-/*#ifndef MAINMENUSTATE_H
+#ifndef MAINMANUSTATE_H
 #define MAINMENUSTATE_H
 
-#include "State.h"
+#include"GameState.h"
+#include"Button.h"
+
 class MainMenuState :
-    public State
+	public State
 {
+
+
 private:
-    
-    sf::RectangleShape background;
 
-    //Functions
-    void initKeybinds();
+	//Variable
+	sf::RectangleShape background;
+
+	
+
+	//Fanction
+	void iniFonts();
+	void initKeybinds();
 
 public:
-   MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys);
-    virtual ~MainMenuState();
+	MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys);
+	virtual ~MainMenuState();
 
 
-    void endState();
+	void endState();
 
-    void updateInput(const float& dt);
-    void update(const float& dt);
-    void render(sf::RenderTarget* target = NULL);
-public:
-    MainMenuState();
-    virtual ~MainMenuState();
+	void updateInput(const float& dt);
+	void update(const float& dt);
+	void render(sf::RenderTarget* target = NULL);
+
 };
-#endif*/
-
+#endif

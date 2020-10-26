@@ -47,10 +47,7 @@ void Game::initKeys()
         }
         
     }
-    else 
-    {
-        std::cout << "Can't open config\n";
-    }
+    
 
 
     ifs.close();
@@ -70,6 +67,7 @@ void Game::initKeys()
 void Game::iniStates()
 {
 
+        this->states.push(new MainMenuState(this->window, &this->supportedKeys));
         this->states.push(new GameState(this->window, &this->supportedKeys));
  
     
