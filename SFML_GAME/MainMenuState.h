@@ -13,7 +13,10 @@ private:
 
 	//Variable
 	sf::RectangleShape background;
+	sf::Font font;
+	
 
+	Button* gamestate_btn;
 	
 
 	//Fanction
