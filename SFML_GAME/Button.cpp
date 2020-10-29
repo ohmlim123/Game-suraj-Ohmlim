@@ -9,6 +9,7 @@ Button::Button(float x, float y, float width, float height, sf::Font* font, std:
 	this->shape.setPosition(sf::Vector2f(x, y));
 	this->shape.setSize(sf::Vector2f(width, height));
 	
+
 	
 	this->font;
 	this->text.setFont(*this->font);
