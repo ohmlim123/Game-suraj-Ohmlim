@@ -22,7 +22,7 @@ void MainMenuState::initBackground()
 
 void MainMenuState::initFonts()
 {
-	if (!this->font.loadFromFile("Fonts/Rodwick.otf"))
+	if (!this->font.loadFromFile("Fonts/Petchlamoon-Regular.ttf"))
 	{
 		throw("Error to upload Fonts!!");
 	}
@@ -56,25 +56,28 @@ void MainMenuState::initKeybinds()
 
 void MainMenuState::initButtons()
 {
-	this->buttons["GAME_STATE"] = new Button(850, 200, 250, 50,
-		&this->font, "NEW Game",
-		sf::Color(100, 100, 100, 200),
-		sf::Color(150, 150, 150, 255),
-		sf::Color(20, 20, 20, 200));
+	this->buttons["GAME_STATE"] = new Button(850.f, 200.f, 250.f, 50.f,
+		&this->font, "NEW Game", 50 ,
+		sf::Color(100, 100, 100, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
+		sf::Color(100, 100, 100, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 
 
-	this->buttons["SETTINGS"] = new Button(850, 350, 250, 50,
-		&this->font, "Settings",
-		sf::Color(100, 100, 100, 200),
-		sf::Color(150, 150, 150, 255),
-		sf::Color(20, 20, 20, 200));
+
+	this->buttons["SETTINGS"] = new Button(850, 300, 250, 50,
+		&this->font, "Settings", 50,
+		sf::Color(100, 100, 100, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
+		sf::Color(100, 100, 100, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
+
+	this->buttons["EDITOR_STATE"] = new Button(850,400, 250, 50,
+		&this->font, "Editor", 50,
+		sf::Color(100, 100, 100, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
+		sf::Color(100, 100, 100, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 
 
-	this->buttons["EXIT_STATE"] = new Button(850,600, 250, 50,
-		&this->font, "Quit",
-		sf::Color(70, 70, 70, 200),
-		sf::Color(150, 150, 150, 255),
-		sf::Color(20, 20, 20, 200));
+	this->buttons["EXIT_STATE"] = new Button(850,800, 250, 50,
+		&this->font, "Quit", 50,
+		sf::Color(100, 100, 100, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 }
 
 MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states)
@@ -101,14 +104,10 @@ MainMenuState::~MainMenuState()
 	}
 }
 
-void MainMenuState::endState()
-{
-	std::cout << "Ending MainMenuState!" << "\n";
-}
 
 void MainMenuState::updateInput(const float& dt)
 {
-	this->checkForquit();
+	
 
 
 
@@ -132,7 +131,7 @@ void MainMenuState::updateButtons()
 	//Quit this Game
 	if (this->buttons["EXIT_STATE"]->isPressed())
 	{
-		this->quit = true;
+		this->endState();
 	}
 }
 

@@ -9,17 +9,20 @@ class GameState :
 {
 private:
 
-	Entity player;
+	Player* player;
 
 	//Fanction
 	void initKeybinds();
+	void initTextures();
+	void initPlayers();
 	
 public :
 	GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states);
 	virtual ~GameState();
 	
 	
-	void endState();
+	
+	//Functions
 
 	void updateInput(const float& dt);
 	void update(const float& dt);

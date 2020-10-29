@@ -1,29 +1,65 @@
 #include"Entity.h"
+void Entity::iniVarialbe()
+{
+	
+	
+	
+	this->movementcomponent = NULL;
+}
 Entity::Entity()
 {
-	this->shape.setSize(sf::Vector2f(50.f, 50.f));
-	this->shape.setFillColor(sf::Color::Green);
-	this->movementSpeed = 100.0f;
+	this->iniVarialbe();
 }
 
 Entity::~Entity()
 {
-
+	delete this->movementcomponent;
 }
 
-void Entity::move(const float& dt ,const float dir_x, const float dir_y)
+//Component Function
+void Entity::setTexture(sf::Texture& texture)
 {
-	this->shape.move(dir_x * this->movementSpeed  * dt,dir_y * this->movementSpeed * dt);
+	
+	this->sprite.setTexture(texture);
+}
+
+void Entity::createMovementComponent(const float maxVelocity, const float acceleration, const float deceleration)
+{
+	this->movementcomponent = new MovementComponent(this->sprite, maxVelocity,acceleration,deceleration);
+}
+
+
+
+// Functions
+
+void Entity::setPosition(const float x, const float y)
+{
+		this->sprite.setPosition(x,y);
+}
+
+void Entity::move(const float dir_x, const float dir_y, const float& dt )
+{
+	if (this->movementcomponent)
+	{
+		this->movementcomponent->move(dir_x, dir_y,dt); // Set Velocity
+
+	}
+	
 }
 
 void Entity::update(const float& dt)
 {
-	
+	if (this->movementcomponent)
+		this->movementcomponent->update(dt);
 }
 
 void Entity::render(sf::RenderTarget * target)
 {
-	target->draw(this->shape);
+	
+	
+		target->draw(this->sprite);
+
+	
 
 }
 
