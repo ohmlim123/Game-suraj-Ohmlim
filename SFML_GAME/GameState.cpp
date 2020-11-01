@@ -31,7 +31,7 @@ void GameState::initKeybinds()
 
 void GameState::initTextures()
 {
-	if (!this->textures["PLAYER_IDLE"].loadFromFile("Resources/Images/Sprite/Player/test1.png"))
+	if (!this->textures["PLAYER_SHEET"].loadFromFile("Resources/Images/Sprite/Player/Tom_ohmlim.png"))
 	{
 		throw("Error Game State could not load player idle textures");
 	}
@@ -39,7 +39,7 @@ void GameState::initTextures()
 
 void GameState::initPlayers()
 {
-	this->player = new Player(0, 0, this->textures["PLAYER_IDLE"]);
+	this->player = new Player(0, 0, this->textures["PLAYER_SHEET"]);
 }
 
 GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states)
