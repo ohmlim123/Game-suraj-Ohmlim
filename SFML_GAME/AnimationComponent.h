@@ -76,7 +76,6 @@ private :
 		{
 			this->timer = 0.f;
 			this->currentRect = this->startRect;
-			
 		}
 
 
@@ -86,6 +85,7 @@ private :
 	sf::Texture& textureSheet;
 
 	std::map<std::string, Animation*> animations;
+	Animation* lastAnimation;
 
 
 

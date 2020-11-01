@@ -23,51 +23,96 @@ const sf::Vector2f& MovementComponent::getVelocity() const
 
 const bool MovementComponent::getState(const short unsigned state) const
 {
+	int row = 0;
 	switch (state)
 	{
 	case IDLE:
 
 		if (this->velocity.x == 0.f && this->velocity.y == 0.f)
+		{
+			row = 0;
 			return true;
+		}
+			
 
+		
 		break;
 
 	case MOVING:
 
 		if (this->velocity.x != 0.f || this->velocity.y != 0.f)
 			return true;
-
+		
 		break;
 
 	case MOVING_LEFT:
 
 		if (this->velocity.x < 0.f)
+		{
+			row = 1;
 			return true;
+		}
+			
+
+		
 
 		break;
 
 	case MOVING_RIGHT:
 
 		if (this->velocity.x > 0.f)
+		{
+			row = 4;
 			return true;
+		}
+			
+
+		
 
 		break;
 
 	case MOVING_UP:
 
 		if (this->velocity.y < 0.f)
+		{
+			row = 7;
 			return true;
+		}
+			
+
+		
 
 		break;
 
 	case MOVING_DOWN:
 
 		if (this->velocity.y > 0.f)
+		{
+			row = 3;
 			return true;
+		}
+			
+
+		
 
 		break;
-
 	
+	case WAIT_LEFT:
+		if (this->velocity.x == 0.f && row == 1)
+			return true;
+	
+		break;
+
+	case WAIT_RIGHT:
+		if (this->velocity.x == 0.f && row == 4)
+			return true;
+		break;
+
+	case WAIT_DOWN:
+		if (this->velocity.y == 0.f && row == 3)
+			return true;
+		break;
+		
 	}
 
 	return false;

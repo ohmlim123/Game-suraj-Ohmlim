@@ -17,7 +17,12 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
-enum movement_states{IDLE = 0, MOVING,MOVING_LEFT,MOVING_RIGHT,MOVING_UP,MOVING_DOWN};
+enum movement_states
+{
+	IDLE = 0, MOVING, MOVING_LEFT, MOVING_RIGHT, MOVING_UP, MOVING_DOWN,
+	WAIT_LEFT, WAIT_RIGHT, WAIT_DOWN
+
+};
 
 class MovementComponent
 {
@@ -45,12 +50,7 @@ public:
 
 	//Function
 	const bool getState(const short unsigned state) const;
-	const bool idle() const;
-	const bool moving() const;
-	const bool movingleft() const;
-	const bool movingright() const;
-	const bool movingup() const;
-	const bool movingdown()const;
+	
 	
 	
 	void move(const float x, const float y,const float& dt);
