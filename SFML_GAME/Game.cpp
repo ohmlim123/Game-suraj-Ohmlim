@@ -66,7 +66,6 @@ void Game::initKeys()
 
         while (ifs >> key >> key_value)
         {
-            
             this->supportedKeys[key] = key_value;
         }
         

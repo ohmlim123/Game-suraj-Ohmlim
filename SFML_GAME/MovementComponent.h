@@ -10,12 +10,14 @@
 #include<stack>
 #include<map>
 
+ 
 
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+
 
 enum movement_states
 {
@@ -46,6 +48,7 @@ public:
 	virtual ~MovementComponent();
 
 	//Accessors
+	const float& getMaxVelocity() const;
 	const sf::Vector2f& getVelocity() const;
 
 	//Function

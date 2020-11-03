@@ -12,6 +12,11 @@ MovementComponent::~MovementComponent()
 
 }
 
+const float& MovementComponent::getMaxVelocity() const
+{
+	return this->maxVelocity;
+}
+
 const sf::Vector2f& MovementComponent::getVelocity() const
 {
 	return this->velocity;
@@ -71,48 +76,6 @@ const bool MovementComponent::getState(const short unsigned state) const
 
 		break;
 
-	case MOVING_UP:
-
-		if (this->velocity.y < 0.f)
-		{
-			row = 7;
-			return true;
-		}
-			
-
-		
-
-		break;
-
-	case MOVING_DOWN:
-
-		if (this->velocity.y > 0.f)
-		{
-			row = 3;
-			return true;
-		}
-			
-
-		
-
-		break;
-	
-	case WAIT_LEFT:
-		if (this->velocity.x == 0.f && row == 1)
-			return true;
-	
-		break;
-
-	case WAIT_RIGHT:
-		if (this->velocity.x == 0.f && row == 4)
-			return true;
-		break;
-
-	case WAIT_DOWN:
-		if (this->velocity.y == 0.f && row == 3)
-			return true;
-		break;
-		
 	}
 
 	return false;
@@ -135,11 +98,12 @@ void MovementComponent::move(const float dir_x, const float dir_y, const float& 
 
 	if (this->velocity.x > 0.f)// Check for right
 	{
-		
+		if (this->velocity.x > this->maxVelocity)
+			this->velocity.x = this->maxVelocity;
 	}
 	else if (this->velocity.x < 0.f) // Check for left
 	{
-		if (this->velocity.x > -this->maxVelocity)
+		if (this->velocity.x < -this->maxVelocity)
 			this->velocity.x = -this->maxVelocity;
 	}
 

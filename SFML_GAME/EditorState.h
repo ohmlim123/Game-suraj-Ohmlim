@@ -2,7 +2,7 @@
 #define EDITORSTATE_H
 
 #include "State.h"
-#include "Button.h"
+#include "Gui.h"
 class EditorState :
     public State
 {
@@ -12,7 +12,7 @@ private:
 	sf::Font font;
 
 
-	std::map<std::string, Button*>buttons;
+	std::map<std::string, gui::Button*>buttons;
 
 
 	//Fanction
