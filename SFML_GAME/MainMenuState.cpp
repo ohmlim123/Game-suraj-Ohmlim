@@ -1,3 +1,4 @@
+#include"stdafx.h"
 #include"MainMenuState.h"
 
 
@@ -74,9 +75,9 @@ void MainMenuState::initButtons()
 		sf::Color(100, 100, 100, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 
 
-	this->buttons["EXIT_STATE"] = new gui::Button(1550.f,820.f, 250.f, 50.f,
+	this->buttons["EXIT_STATE"] = new gui::Button(300.f,820.f, 250.f, 50.f,
 		&this->font, "Quit", 50,
-		sf::Color(100, 100, 100, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
+		sf::Color(350, 350, 350, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 }
 

@@ -1,8 +1,9 @@
+#include"stdafx.h"
 #include "SettingState.h"
 
 void SettingState::initVariables()
 {
-
+	this->modes = sf::VideoMode::getFullscreenModes();
 }
 
 void SettingState::initBackground()
@@ -52,13 +53,39 @@ void SettingState::initKeybinds()
 	ifs.close();
 }
 
-void SettingState::initButtons()
+void SettingState::initGui()
 {
 
-	this->buttons["EXIT_STATE"] = new gui::Button(1550.f, 820.f, 250.f, 50.f,
-		&this->font, "Quit", 50,
+	this->buttons["BACK"] = new gui::Button(1700.f, 820.f, 250.f, 50.f,
+		&this->font, "Back", 50,
 		sf::Color(100, 100, 100, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
+
+	this->buttons["APPLY"] = new gui::Button(1500.f, 820.f, 250.f, 50.f,
+		&this->font, "Apply", 50,
+		sf::Color(100, 100, 100, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
+
+	std::vector<std::string>modes_str;
+	for (auto& i : this->modes)
+	{
+		modes_str.push_back(std::to_string(i.width) + 'x' + std::to_string(i.height));
+	}
+
+	this->dropDownLists["RESOLUTION"] =  new gui::DropDownList(800, 400, 200, 50, font,modes_str.data(), modes_str.size());
+}
+
+void SettingState::initText()
+{
+	this->optionsText.setFont(this->font);
+	this->optionsText.setPosition(sf::Vector2f(100.f, 310.f));
+	this->optionsText.setCharacterSize(25);
+	this->optionsText.setFillColor(sf::Color(255, 255, 255, 200));
+
+
+	this->optionsText.setString(
+		"Resolution \n\nFullscreen \n\nVsync \n\nAntialiasing \n\n"
+		);
 }
 
 SettingState::SettingState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states)
@@ -68,7 +95,8 @@ SettingState::SettingState(sf::RenderWindow* window, std::map<std::string, int>*
 	this->initBackground();
 	this->initFonts();
 	this->initKeybinds();
-	this->initButtons();
+	this->initGui();
+	this->initText();
 }
 
 SettingState::~SettingState()
@@ -78,6 +106,13 @@ SettingState::~SettingState()
 	{
 		delete it->second;
 	}
+
+	auto it2 = this->dropDownLists.begin();
+	for (it2 = this->dropDownLists.begin(); it2 != this->dropDownLists.end(); ++it2)
+	{
+		delete it2->second;
+	}
+	
 }
 
 
@@ -95,25 +130,36 @@ void SettingState::updateInput(const float& dt)
 
 }
 
-void SettingState::updateButtons()
+void SettingState::updateGui(const float& dt)
 {
 	// Update all the button in the state 
+	//Buttons
 	for (auto& it : this->buttons)
 	{
 		it.second->update(this->mousePosView);
 	}
 
-	
-	//Setting
-
-
-	
-
+	//Button Funcctionality
 	//Quit this Game
-	if (this->buttons["EXIT_STATE"]->isPressed())
+	if (this->buttons["BACK"]->isPressed())
 	{
 		this->endState();
 	}
+	//Apply selected setting
+	if (this->buttons["APPLY"]->isPressed())
+	{
+
+		this->window->create(this->modes[this->dropDownLists["RESOLUTION"]->getActiveElementId()], "test",sf::Style::Default);
+	}
+
+	//dropdownlists
+	for (auto& it : this->dropDownLists)
+	{
+		it.second->update(this->mousePosView, dt);
+	}
+
+	//dropdwn;ist functionality
+	
 }
 
 void SettingState::update(const float& dt)
@@ -123,15 +169,20 @@ void SettingState::update(const float& dt)
 
 
 
-	this->updateButtons();
+	this->updateGui(dt);
 
-
+	
 }
 
-void SettingState::renderButtons(sf::RenderTarget& target)
+void SettingState::renderGui(sf::RenderTarget& target)
 {
 
 	for (auto& it : this->buttons)
+	{
+		it.second->render(target);
+	}
+
+	for (auto& it : this->dropDownLists)
 	{
 		it.second->render(target);
 	}
@@ -147,17 +198,19 @@ void SettingState::render(sf::RenderTarget* target)
 	target->draw(this->background);
 
 
-	this->renderButtons(*target);
+	this->renderGui(*target);
+
+	target->draw(this->optionsText);
+	
 
 
 	//REMOVE LATER
-	/*sf::Text mouseText;
+	sf::Text mouseText;
 	mouseText.setPosition(this->mousePosView.x,this->mousePosView.y - 50);
 	mouseText.setFont(this->font);
 	mouseText.setCharacterSize(12);
 	std::stringstream ss;
 	ss << this->mousePosView.x << " " << this->mousePosView.y;
 	mouseText.setString(ss.str());
-
-	target->draw(mouseText);*/
+	target->draw(mouseText);
 }
