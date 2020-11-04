@@ -10,6 +10,7 @@ class SettingState :
 {
 private:
 	//Variable
+	GraphicsSettings& gfxSettings;
 	sf::Texture backgroundTexture;
 	sf::RectangleShape background;
 	sf::Font font;
@@ -32,7 +33,7 @@ private:
 	void initText();
 
 public:
-    SettingState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states);
+    SettingState(sf::RenderWindow* window, GraphicsSettings& gfxSettings, std::map<std::string, int>* supportedKeys, std::stack<State*>* states);
     virtual ~SettingState();
 
     //Accessor

@@ -80,7 +80,7 @@ void Game::initKeys()
 void Game::iniStates()
 {
 
-        this->states.push(new MainMenuState(this->window, &this->supportedKeys, &this->states));
+        this->states.push(new MainMenuState(this->window, this->gfxSettings,&this->supportedKeys, &this->states));
         //this->states.push(new GameState(this->window, &this->supportedKeys));
  
     
