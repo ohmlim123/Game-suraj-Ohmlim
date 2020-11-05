@@ -13,7 +13,7 @@ void SettingState::initBackground()
 			static_cast<float>(this->window->getSize().x),
 			static_cast<float>(this->window->getSize().y)));
 
-	this->backgroundTexture.loadFromFile("Resources/Images/background/bg2.png");
+	this->backgroundTexture.loadFromFile("Resources/Images/background/background1.png");
 
 
 	this->background.setTexture(&this->backgroundTexture);
@@ -88,8 +88,8 @@ void SettingState::initText()
 		);
 }
 
-SettingState::SettingState(sf::RenderWindow* window, GraphicsSettings& gfxSettings, std::map<std::string, int>* supportedKeys, std::stack<State*>* states)
-	: State(window, supportedKeys,states),gfxSettings(gfxSettings)
+SettingState::SettingState(StateData* state_data)
+	: State(state_data)
 {
 	this->initVariables();
 	this->initBackground();
@@ -148,8 +148,8 @@ void SettingState::updateGui(const float& dt)
 	//Apply selected setting
 	if (this->buttons["APPLY"]->isPressed())
 	{
-		this->gfxSettings.resolution = this->modes[this->dropDownLists["RESOLUTION"]->getActiveElementId()];
-		this->window->create(this->gfxSettings.resolution, this->gfxSettings.title,sf::Style::Default);
+		this->stateData->gfxSettings->resolution = this->modes[this->dropDownLists["RESOLUTION"]->getActiveElementId()];
+		this->window->create(this->stateData->gfxSettings->resolution, this->stateData->gfxSettings->title,sf::Style::Default);
 	}
 
 	//dropdownlists
