@@ -96,8 +96,9 @@ void MovementComponent::move(const float dir_x, const float dir_y, const float& 
 	//Accelation
 
 	this->velocity.x += this->acceleration * dir_x;
+	this->velocity.y += this->acceleration * dir_y;
 
-	if (this->velocity.x > 0.f)// Check for right
+	/*if (this->velocity.x > 0.f)// Check for right
 	{
 		if (this->velocity.x > this->maxVelocity)
 			this->velocity.x = this->maxVelocity;
@@ -106,9 +107,9 @@ void MovementComponent::move(const float dir_x, const float dir_y, const float& 
 	{
 		if (this->velocity.x < -this->maxVelocity)
 			this->velocity.x = -this->maxVelocity;
-	}
+	}*/
 
-	this->velocity.y += this->acceleration * dir_y;
+	
 
 }
 

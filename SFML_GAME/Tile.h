@@ -23,6 +23,8 @@ public:
 
 	//Function
 
+	const bool& getCollision() const;
+	const sf::Vector2f& getPosition() const;
 	const std::string getAsString() const;
 
 	void update();

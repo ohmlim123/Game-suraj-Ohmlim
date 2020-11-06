@@ -107,6 +107,8 @@ void EditorState::initGui()
 		this->stateData->gridSize, this->tileMap->getTileSheet(),
 		this->font,"X"
 	);
+
+
 }
 
 void EditorState::initTileMap()
@@ -316,14 +318,19 @@ void EditorState::renderButtons(sf::RenderTarget& target)
 
 void EditorState::renderGui(sf::RenderTarget& target)
 {
-	if(!this->textureSelector->getActive())
-	target.draw(this->selectorRect);
-
+	if (!this->textureSelector->getActive())
+	{
+		target.setView(this->view);
+		target.draw(this->selectorRect);
+	}
+	
+	target.setView(this->window->getDefaultView());
 	this->textureSelector->render(target);
-
-	target.draw(this->cursorText);
-
 	target.draw(this->sidebar);
+
+	target.setView(this->view);
+	target.draw(this->cursorText);
+	
 }
 
 void EditorState::render(sf::RenderTarget* target)
@@ -338,10 +345,13 @@ void EditorState::render(sf::RenderTarget* target)
 
 	target->setView(this->window->getDefaultView());
 	this->renderButtons(*target);
+
 	this->renderGui(*target);
+
 
 	if (this->paused)
 	{
+		target->setView(this->window->getDefaultView());
 		this->pmenu->render(*target);
 	}
 	
