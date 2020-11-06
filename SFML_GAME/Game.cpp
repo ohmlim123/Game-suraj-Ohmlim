@@ -155,20 +155,25 @@ void Game::update()
     if (!this->states.empty() && this->window->hasFocus())
     {
 
-        this->states.top()->update(this->dt);
         
-        if (this->states.top()->getQuit())
-        {
-            this->states.top()->endState();
-            delete this->states.top();
-            this->states.pop();
+
+
+            this->states.top()->update(this->dt);
+
+            if (this->states.top()->getQuit())
+            {
+                this->states.top()->endState();
+                delete this->states.top();
+                this->states.pop();
+            }
         }
-    }
-    else
-    {
-        this->endApplication();
-        this->window->close();
-    }
+        else
+        {
+            this->endApplication();
+            this->window->close();
+        }
+    
+    
 }
 
 void Game::render()
@@ -187,7 +192,9 @@ void Game::run()
     while (this->window->isOpen())
     {
         this->updateDt();
-        this->update();
+        
+            this->update();
+
         this->render();
     }
 }

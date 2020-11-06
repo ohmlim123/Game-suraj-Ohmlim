@@ -38,6 +38,9 @@ public:
 
 	//Function
 	const bool getState(const short unsigned state) const;
+	void stopVelocity();
+	void stopVelocityX();
+	void stopVelocityY();
 	
 	
 	
