@@ -333,7 +333,7 @@ void TileMap::updateCollision(Entity* entity , const float& dt)
 				//Right collision
 				if (playerBounds.left < wallBounds.left
 					&& playerBounds.left + playerBounds.width < wallBounds.left + wallBounds.width
-					&& playerBounds.left <  wallBounds.top + wallBounds.height
+					&& playerBounds.top <  wallBounds.top + wallBounds.height
 					&& playerBounds.top + playerBounds.height > wallBounds.top
 					)
 				{
