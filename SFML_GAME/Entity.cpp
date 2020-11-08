@@ -43,10 +43,10 @@ void Entity::createAnimationComponent( sf::Texture& texture_sheet)
 	this->animationComponent = new AnimationComponent(this->sprite, texture_sheet);
 }
 
-void Entity::createAttributeComponent()
+/*void Entity::createAttributeComponent()
 {
 	this->attributeComponent = new AttributeComponent();
-}
+}*/
 
 const sf::Vector2f& Entity::getPosition() const
 {

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "AttributeComponent.h"
-
+/*
 AttributeComponent::AttributeComponent(unsigned level)
 {
 	this->level = level;
@@ -43,4 +43,4 @@ void AttributeComponent::levelup()
 void AttributeComponent::update()
 {
 
-}
+}*/

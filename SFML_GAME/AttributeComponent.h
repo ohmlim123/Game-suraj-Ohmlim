@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 class AttributeComponent
 {
 public:
@@ -37,5 +37,5 @@ public:
 	void levelup();
 
 	void update();
-};
+};*/
 
