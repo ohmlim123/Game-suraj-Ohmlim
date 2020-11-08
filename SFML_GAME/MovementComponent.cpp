@@ -116,21 +116,9 @@ void MovementComponent::move(const float dir_x, const float dir_y, const float& 
 
 	//Accelation
 
-	this->velocity.x += this->acceleration * dir_x;
-	this->velocity.y += this->acceleration * dir_y;
+	this->velocity.x += this->acceleration * dir_x * dt;
+	this->velocity.y += this->acceleration * dir_y * dt;
 
-	/*if (this->velocity.x > 0.f)// Check for right
-	{
-		if (this->velocity.x > this->maxVelocity)
-			this->velocity.x = this->maxVelocity;
-	}
-	else if (this->velocity.x < 0.f) // Check for left
-	{
-		if (this->velocity.x < -this->maxVelocity)
-			this->velocity.x = -this->maxVelocity;
-	}*/
-
-	
 
 }
 
@@ -145,7 +133,7 @@ void MovementComponent::update(const float& dt)
 
 		
 		//Deceleration x positive
-		this->velocity.x -= deceleration;
+		this->velocity.x -= deceleration * dt ;
 		if (this->velocity.x < 0.f)
 			this->velocity.x = 0.f;
 		
@@ -158,7 +146,7 @@ void MovementComponent::update(const float& dt)
 			this->velocity.x = -this->maxVelocity;
 
 		//Deceleration x negetive
-		this->velocity.x += deceleration;
+		this->velocity.x += deceleration * dt;
 		if (this->velocity.x > 0.f)
 			this->velocity.x = 0.f;
 	}
@@ -170,7 +158,7 @@ void MovementComponent::update(const float& dt)
 
 
 		//Deceleration y positive
-		this->velocity.y -= deceleration;
+		this->velocity.y -= deceleration * dt;
 		if (this->velocity.y < 0.f)
 			this->velocity.y = 0.f;
 
@@ -183,7 +171,7 @@ void MovementComponent::update(const float& dt)
 			this->velocity.y = -this->maxVelocity;
 
 		//Deceleration y negetive
-		this->velocity.y += deceleration;
+		this->velocity.y += deceleration * dt;
 		if (this->velocity.y > 0.f)
 			this->velocity.y = 0.f;
 	}

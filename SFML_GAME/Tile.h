@@ -2,7 +2,7 @@
 #define TILE_H
 
 
-enum TileTypes {DEFAULT = 0, DAMAGING};
+enum TileTypes {DEFAULT = 0, DAMAGING,DOODAD};
 
 
 class Tile
@@ -20,6 +20,10 @@ public:
 		bool collision = false, short type = TileTypes::DEFAULT
 	);
 	virtual  ~Tile();
+
+	//Accessors
+
+	const short& getType() const;
 
 	//Function
 

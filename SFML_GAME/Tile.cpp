@@ -27,6 +27,8 @@ Tile::~Tile()
 
 }
 
+
+
 const bool& Tile::getCollision() const
 {
 
@@ -34,6 +36,12 @@ const bool& Tile::getCollision() const
 }
 
 //Accessors
+
+const short& Tile::getType() const
+{
+	return this->type;
+}
+
 const sf::Vector2f& Tile::getPosition() const
 {
 	return this->shape.getPosition();
