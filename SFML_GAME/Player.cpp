@@ -27,6 +27,7 @@ Player::Player(float x , float y , sf::Texture& texture_sheet)
 	this->createHitboxComponent(this->sprite,84.f,40.f,66.f,90.f);
 	this->createMovementComponent(350.f, 1500.f, 500.f);
 	this->createAnimationComponent( texture_sheet);
+	this->createAttributeComponent(1);
 
 	this->animationComponent->addAnimation("IDLE", 10.f, 0, 0, 0, 0, 84,66);
 	this->animationComponent->addAnimation("WALK", 8.f, 0, 1, 7, 1, 84, 66);
@@ -37,12 +38,49 @@ Player::Player(float x , float y , sf::Texture& texture_sheet)
 
 Player::~Player()
 {
+
+}
+//Accessors
+AttributeComponent* Player::getAttributeComponent()
+{
+
+	return this->attributeComponent;
+}
+//Functions
+void Player::loseHP(const int hp)
+{
+	this->attributeComponent->hp -= hp;
+
+	if(this->attributeComponent->hp < 0)
+		this->attributeComponent->hp = 0;
+}
+
+void Player::gainHP(const int hp)
+{
+	this->attributeComponent->hp += hp;
+
+	if (this->attributeComponent->hp > this->attributeComponent->hpMax)
+		this->attributeComponent->hp = this->attributeComponent->hpMax;
+}
+
+void Player::loseEXP(const int exp)
+{
+	this->attributeComponent->exp -= exp;
+
+	if (this->attributeComponent->exp < 0)
+		this->attributeComponent->exp = 0;
+}
+
+void Player::gainEXP(const int exp)
+{
 	
+
+	this->attributeComponent->gainExp(exp);
 }
 
 
 
-//Functions
+
 void Player::updateAttack()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
@@ -107,6 +145,7 @@ void Player::updateAnimation(const float& dt)
 }
 void Player::update(const float& dt)
 {
+	
 	
 		this->movementcomponent->update(dt);
 

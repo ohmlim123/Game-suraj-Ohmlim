@@ -5,9 +5,11 @@
 #include "State.h"
 #include"PauseMenu.h"
 #include"TileMap.h"
+#include"PlayerGui.h"
 
 class PauseMenu;
 class Player;
+class PlayerGui;
 class TileMap;
 class sf::View;
 class sf::Font;
@@ -28,6 +30,7 @@ private:
 	PauseMenu* pmenu;
 
 	Player* player;
+	PlayerGui* playerGui;
 	sf::Texture texture;
 
 
@@ -41,6 +44,7 @@ private:
 	void initTextures();
 	void initPauseMenu();
 	void initPlayers();
+	void initPlayerGui();
 	void initTileMap();
 	
 public :
@@ -53,6 +57,7 @@ public :
 	void updateView(const float& dt);
 	void updateInput(const float& dt);
 	void updatePlayerInput(const float& dt);
+	void updatePlayerGui(const float& dt);
 	void updatePauseMenuButtons();
 	void updateTileMap(const float& dt);
 	void update(const float& dt);

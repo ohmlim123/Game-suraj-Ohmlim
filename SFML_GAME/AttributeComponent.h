@@ -1,20 +1,20 @@
-/*#pragma once
+#pragma once
 class AttributeComponent
 {
 public:
 	//Leveling 
-	unsigned level;
-	unsigned exp;
-	unsigned expNext;
-	unsigned atrributePoints;
+	int level;
+	int exp;
+	int expNext;
+	int atrributePoints;
 
 
 	//Attributes
-	unsigned vitality;
-	unsigned strength;
-	unsigned dexterity;
-	unsigned agility;
-	unsigned intelligence;
+	int vitality;
+	int strength;
+	int dexterity;
+	int agility;
+	int intelligence;
 
 	//Stats
 	int hp;
@@ -27,15 +27,19 @@ public:
 
 
 	//Constructor / Destructor
-	AttributeComponent(unsigned level);
+	
+	AttributeComponent(int level);
 	virtual ~AttributeComponent();
 
 	//funstion
 
-	void calculateExpNext();
-	void updateStats();
-	void levelup();
+	std::string debugPrint() const;
+
+	void gainExp(const int exp);
+
+	void updateStats(const bool reset);
+	void updateLevel();
 
 	void update();
-};*/
+};
 

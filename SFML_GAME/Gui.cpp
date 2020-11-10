@@ -265,16 +265,16 @@ gui::TextureSelector::TextureSelector(float x, float y, float width,
 	this->active = false;
 	this->hiden  = false;
 
-	float offet = 100.f;
+	float offset = gridSize;
 
 	this->bounds.setSize(sf::Vector2f(width, height));
-	this->bounds.setPosition(x  + offet, y);
+	this->bounds.setPosition(x  + offset, y);
 	this->bounds.setFillColor(sf::Color(50, 50, 50, 100));
 	this->bounds.setOutlineThickness(1.f);
 	this->bounds.setOutlineColor(sf::Color(255, 255, 255, 200));
 
 	this->sheet.setTexture(*texture_sheet);
-	this->sheet.setPosition(x + offet, y);
+	this->sheet.setPosition(x + offset, y);
 
 	if (this->sheet.getGlobalBounds().width > this->bounds.getGlobalBounds().width)
 	{
@@ -285,7 +285,7 @@ gui::TextureSelector::TextureSelector(float x, float y, float width,
 		this->sheet.setTextureRect(sf::IntRect(0, 0, static_cast<int>(this->sheet.getGlobalBounds().width), static_cast<int>(this->bounds.getGlobalBounds().height)));
 	}
 
-	this->selector.setPosition(x + offet, y);
+	this->selector.setPosition(x + offset, y);
 	this->selector.setSize(sf::Vector2f(gridSize,gridSize));
 	this->selector.setFillColor(sf::Color::Transparent);
 	this->selector.setOutlineThickness(1.f);
