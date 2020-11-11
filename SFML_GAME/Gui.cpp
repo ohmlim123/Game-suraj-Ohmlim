@@ -25,7 +25,7 @@ const float gui::p2pY(const float perc, const sf::VideoMode& vm)
 	*/
 	return std::floor(static_cast<float>(vm.height) * (perc / 100.f));
 }
-const unsigned gui::calCharSize(const sf::VideoMode& vm)
+const unsigned gui::calCharSize(const sf::VideoMode& vm,const unsigned modifier )
 {
 	/*
 	* Calculate the CharacterSize for text using the current resolution and constant
@@ -34,7 +34,7 @@ const unsigned gui::calCharSize(const sf::VideoMode& vm)
 	*
 	*@return       unsigned        The calcualted CharacterSize   value.
 	*/
-	return static_cast<unsigned>((vm.width + vm.height) / 60);
+	return static_cast<unsigned>((vm.width + vm.height) /modifier);
 }
 
 

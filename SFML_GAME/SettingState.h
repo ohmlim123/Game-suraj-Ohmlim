@@ -26,11 +26,12 @@ private:
 
 	//Fanction
 	void initVariables();
-	void initBackground();
+	
 	void initFonts();
 	void initKeybinds();
 	void initGui();
-	void initText();
+	void resetGui();
+	
 
 public:
     SettingState(StateData* state_data);

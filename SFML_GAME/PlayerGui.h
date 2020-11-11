@@ -12,7 +12,7 @@ private:
 
 	Player* player;
 
-
+	sf::VideoMode& vm;
 	sf::Font font;
 
 	//Level bar
@@ -38,12 +38,12 @@ private:
 
 
 	void initFont();
-	void initLevelBar();
-	void initEXPbar();
+	//void initLevelBar();
+	//void initEXPbar();
 	void initHPBar();
 
 public:
-	PlayerGui(Player* player);
+	PlayerGui(Player* player,sf::VideoMode& vm);
 	virtual ~PlayerGui();
 
 
