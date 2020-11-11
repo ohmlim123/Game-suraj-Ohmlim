@@ -17,6 +17,9 @@ HitboxComponent::HitboxComponent(sf::Sprite& sprite,
 	this->hitbox.setOutlineThickness(-1.f);
 	this->hitbox.setOutlineColor(sf::Color::Blue);
 
+
+
+	//work hard play harder!!
 }
 
 HitboxComponent::~HitboxComponent()

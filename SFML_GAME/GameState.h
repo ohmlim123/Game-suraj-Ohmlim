@@ -62,6 +62,8 @@ public :
 	void updateTileMap(const float& dt);
 	void update(const float& dt);
 	void render(sf::RenderTarget* target = NULL);
+
+
 };
 
 #endif 

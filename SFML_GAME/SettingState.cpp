@@ -56,13 +56,19 @@ void SettingState::initKeybinds()
 void SettingState::initGui()
 {
 
-	this->buttons["BACK"] = new gui::Button(1700.f, 820.f, 250.f, 65.f,
-		&this->font, "Back", 50,
+	const sf::VideoMode& vm = this->stateData->gfxSettings->resolution;
+
+	this->buttons["BACK"] = new gui::Button(
+		gui::p2pX(70.5f,vm), gui::p2pY(75.9f, vm),
+		gui::p2pX(13.f, vm), gui::p2pY(6.f, vm),
+		&this->font, "Back", gui::calCharSize(vm),
 		sf::Color(100, 100, 100, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 
-	this->buttons["APPLY"] = new gui::Button(1500.f, 820.f, 250.f, 65.f,
-		&this->font, "Apply", 50,
+	this->buttons["APPLY"] = new gui::Button(
+		gui::p2pX(60.7f, vm), gui::p2pY(75.9f, vm),
+		gui::p2pX(13.f, vm), gui::p2pY(6.f, vm),
+		&this->font, "Apply", gui::calCharSize(vm),
 		sf::Color(100, 100, 100, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 
@@ -72,7 +78,10 @@ void SettingState::initGui()
 		modes_str.push_back(std::to_string(i.width) + 'x' + std::to_string(i.height));
 	}
 
-	this->dropDownLists["RESOLUTION"] =  new gui::DropDownList(800, 400, 200, 50, font,modes_str.data(), modes_str.size());
+	this->dropDownLists["RESOLUTION"] =  new gui::DropDownList(
+		gui::p2pX(41.6f, vm), gui::p2pY(37.f, vm),
+		gui::p2pX(10.4f, vm), gui::p2pY(6.f, vm),
+		font,modes_str.data(), modes_str.size());
 }
 
 void SettingState::initText()

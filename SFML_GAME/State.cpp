@@ -35,7 +35,9 @@ const bool State::getKeytime()
 	}
 	return false;
 }
+
 //functions
+
 void State::endState()
 {
 	this->quit = true;
