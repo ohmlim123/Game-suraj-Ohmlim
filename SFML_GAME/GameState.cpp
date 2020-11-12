@@ -145,6 +145,28 @@ void GameState::updateView(const float& dt)
 		std::floor(this->player->getPosition().x ),
 		std::floor (this->player->getPosition().y)
 	);
+
+	if (this->view.getCenter().x - this->view.getSize().x / 2.f < 0.f)
+	{
+		this->view.setCenter(0.f + this->view.getSize().x / 2.f, this->view.getCenter().y);
+	}
+	else if(this->view.getCenter().x + this->view.getSize().x / 2.f > this->tileMap->getMaxSizeF().x)
+	{
+		this->view.setCenter(this->tileMap->getMaxSizeF().x - this->view.getSize().x / 2.f, this->view.getCenter().y);
+	}
+	if (this->view.getCenter().y - this->view.getSize().y / 2.f < 0.f)
+	{
+		this->view.setCenter( this->view.getCenter().x ,0.f +  this->view.getSize().y / 2.f);
+	}
+	else if (this->view.getCenter().y + this->view.getSize().y / 2.f > this->tileMap->getMaxSizeF().x)
+	{
+		this->view.setCenter( this->view.getCenter().x , this->tileMap->getMaxSizeF().x - this->view.getSize().y / 2.f);
+	}
+
+	this->viewGridPosition.x = static_cast<int>(this->view.getCenter().x) / static_cast<int>(this->stateData->gridSize);
+	this->viewGridPosition.y = static_cast<int>(this->view.getCenter().y) / static_cast<int>(this->stateData->gridSize);
+
+
 }
 
 void GameState::updateInput(const float& dt)
@@ -240,7 +262,11 @@ void GameState::render(sf::RenderTarget* target)
 	this->renderTexture.clear();
 
 		this->renderTexture.setView(this->view);
-		this->tileMap->render(this->renderTexture,this->player->getGridPosition(static_cast<int>(this->stateData->gridSize)));
+		this->tileMap->render(
+			this->renderTexture,
+			this->viewGridPosition
+			
+		);
 
 		this->player->render(this->renderTexture);
 	

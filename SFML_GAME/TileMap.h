@@ -39,9 +39,12 @@ public:
 	TileMap(float gridSize, int width, int height,std::string texture_file);
 	virtual ~TileMap();
 
-	//Accessor
+	//Accessor]
+	const bool TileEmpty(const int x, const int y, const int z) const ;
 	const sf::Texture* getTileSheet() const;
 	const int getLayerSize(const int x, const int y, const int z) const;
+	const sf::Vector2i& getMaxSizeGrid() const;
+	const sf::Vector2f& getMaxSizeF() const;
 
 
 	//Functions

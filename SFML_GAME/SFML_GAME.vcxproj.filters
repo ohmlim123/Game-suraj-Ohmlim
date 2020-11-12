@@ -93,6 +93,9 @@
     <ClCompile Include="PlayerGui.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Entities\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="PlayerGui.h">
       <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Entities\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

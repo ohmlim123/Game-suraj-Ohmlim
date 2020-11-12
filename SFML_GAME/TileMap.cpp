@@ -71,6 +71,22 @@ TileMap::~TileMap()
 
 //Accessors
 
+const bool  TileMap::TileEmpty(const int x, const int y, const int z) const
+{
+	if (x >= 0 && x < this->maxSizeWorldGrid.x &&
+		y >= 0 && y < this->maxSizeWorldGrid.y &&
+		z >= 0 && z < this->layers)
+	{
+
+		return this->map[x][y][z].empty();
+
+	}
+		
+	throw("ERROR TILE TILEEMPTY TRYING TO ACCESS OUT OF BOUNDS TILE");
+
+	
+}
+
 const sf::Texture* TileMap::getTileSheet() const
 {
 
@@ -91,6 +107,15 @@ const int TileMap::getLayerSize(const int x, const int y, const int z) const
 	}
 	
 	return -1;
+}
+
+const sf::Vector2i& TileMap::getMaxSizeGrid() const
+{
+	return this->maxSizeWorldGrid;
+}
+const sf::Vector2f& TileMap::getMaxSizeF() const
+{
+	return this->maxSizeWorldF;
 }
 
 //Functions
@@ -412,7 +437,7 @@ void TileMap::render(sf::RenderTarget& target,const sf::Vector2i& gridPosition)
 
 		this->layer = 0;
 
-		this->fromX = gridPosition.x - 8;
+		this->fromX = gridPosition.x - 15;
 		//this->fromX = gridPosition.x - 4;
 		if (this->fromX < 0)
 			this->fromX = 0;
@@ -420,14 +445,14 @@ void TileMap::render(sf::RenderTarget& target,const sf::Vector2i& gridPosition)
 			this->fromX = this->maxSizeWorldGrid.x;
 
 		//this->toX = gridPosition.x + 5;
-		this->toX = gridPosition.x + 10;
+		this->toX = gridPosition.x + 16;
 		if (this->toX < 0)
 			this->toX = 0;
 		else if (this->toX > this->maxSizeWorldGrid.x)
 			this->toX = this->maxSizeWorldGrid.x;
 
 		//this->fromY = gridPosition.y - 3;
-		this->fromY = gridPosition.y - 6;
+		this->fromY = gridPosition.y - 8;
 		if (this->fromY < 0)
 			this->fromY = 0;
 		else if (this->fromY > this->maxSizeWorldGrid.y)
