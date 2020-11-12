@@ -12,6 +12,7 @@ class Player :
 private:
     //Variable
     bool attacking;
+    
 
     //Initializer Function
     void initVariables();

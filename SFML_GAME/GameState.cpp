@@ -93,6 +93,11 @@ void GameState::initPauseMenu()
 	this->pmenu->addButton("QUIT",gui::p2pY(74.f,vm), gui::p2pX(13.f, vm), gui::p2pY(6.f, vm), gui::calCharSize(vm), "Quit");
 }
 
+void GameState::initShader()
+{
+	this->core_shader.loadFromFile("vertex_shader.vert", "fragment_shader.frag");
+}
+
 void GameState::initPlayers()
 {
 	this->player = new Player(0, 0, this->textures["PLAYER_SHEET"]);
@@ -136,7 +141,10 @@ GameState::~GameState()
 //Functions
 void GameState::updateView(const float& dt)
 {
-	this->view.setCenter(std::floor(this->player->getPosition().x), std::floor (this->player->getPosition().y));
+	this->view.setCenter(
+		std::floor(this->player->getPosition().x ),
+		std::floor (this->player->getPosition().y)
+	);
 }
 
 void GameState::updateInput(const float& dt)

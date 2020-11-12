@@ -84,21 +84,21 @@ const bool MovementComponent::getState(const short unsigned state) const
 
 void MovementComponent::stopVelocity()
 {
-	/*Reset the velocity to 0*/
+	//Reset the velocity to 0
 	this->velocity.x = 0.f;
 	this->velocity.y = 0.f;
 }
 
 void MovementComponent::stopVelocityX()
 {
-	/*Reset the velocity x to 0*/
+	//Reset the velocity x to 0
 
 	this->velocity.x = 0.f;
 }
 
 void MovementComponent::stopVelocityY()
 {
-	/*Reset the velocity y to 0*/
+	//Reset the velocity y to 0
 
 	this->velocity.y = 0.f;
 }
