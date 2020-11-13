@@ -2,7 +2,7 @@
 #include"stdafx.h"
 #include"AnimationComponent.h"
 #include"MovementComponent.h"
-/*class Bullet
+class Bullet
 {
 
 public:
@@ -24,5 +24,5 @@ private:
 
 
 
-};*/
+};
 

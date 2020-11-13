@@ -165,6 +165,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerGui.cpp" />
     <ClCompile Include="RangedWeapon.cpp" />
+    <ClCompile Include="SelectState.cpp" />
     <ClCompile Include="SettingState.cpp" />
     <ClCompile Include="GraphicsSettings.cpp" />
     <ClCompile Include="SkillComponent.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerGui.h" />
     <ClInclude Include="RangedWeapon.h" />
+    <ClInclude Include="SelectState.h" />
     <ClInclude Include="SettingState.h" />
     <ClInclude Include="SkillComponent.h" />
     <ClInclude Include="State.h" />

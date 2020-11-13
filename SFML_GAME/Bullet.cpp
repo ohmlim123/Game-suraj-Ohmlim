@@ -19,7 +19,7 @@
 void Bullet::updateBullet(float dt)
 {
 	velocity.x = 500.f;
-	body.setTextureRect(animation.uvRect);
+	//body.setTextureRect(animation.uvRect);
 	body.move(velocity * dt);
 
 }

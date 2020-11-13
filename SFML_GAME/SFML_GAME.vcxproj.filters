@@ -117,6 +117,9 @@
     <ClCompile Include="SkillComponent.cpp">
       <Filter>Entities\Components</Filter>
     </ClCompile>
+    <ClCompile Include="SelectState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="SkillComponent.h">
       <Filter>Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectState.h">
+      <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

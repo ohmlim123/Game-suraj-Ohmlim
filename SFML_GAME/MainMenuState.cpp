@@ -74,10 +74,12 @@ void MainMenuState::initGui()
 	this->btnBackground.setFillColor(sf::Color(10, 10, 10, 220));
 
 	//Buttons
-	this->buttons["GAME_STATE"] = new gui::Button(
-		gui::p2pX(44.2f,vm), gui::p2pY(18.5f, vm),
-		gui::p2pX(13.f, vm),  gui::p2pY(6.f, vm),
-		&this->font, "NEW Game", gui::calCharSize(vm) ,
+	
+
+	this->buttons["SELECT_STATE"] = new gui::Button(
+		gui::p2pX(44.2f, vm), gui::p2pY(18.5f, vm),
+		gui::p2pX(13.f, vm), gui::p2pY(6.f, vm),
+		&this->font, "Play Game", gui::calCharSize(vm),
 		sf::Color(200, 200, 200, 200), sf::Color(255, 255, 255, 255), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0));
 
@@ -162,12 +164,9 @@ void MainMenuState::updateButtons()
 		it.second->update(this->mousePosWindow);
 	}
 	
-	//New Gmae
+	
 
-	if (this->buttons["GAME_STATE"]->isPressed())
-	{
-		this->states->push(new GameState(this->stateData));
-	}
+	
 
 	//Setting
 	if (this->buttons["SETTINGS_STATE"]->isPressed())
@@ -180,6 +179,12 @@ void MainMenuState::updateButtons()
 	if (this->buttons["EDITOR_STATE"]->isPressed())
 	{
 		this->states->push(new EditorState(this->stateData));
+	}
+
+	//Test
+	if (this->buttons["SELECT_STATE"]->isPressed())
+	{
+		this->states->push(new SelectState(this->stateData));
 	}
 
 	//Quit this Game
