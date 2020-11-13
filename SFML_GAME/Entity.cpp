@@ -5,6 +5,8 @@ void Entity::iniVarialbe()
 	this->hitboxComponent = NULL;
 	this->movementcomponent = NULL;
 	this->animationComponent = NULL;
+	this->attributeComponent = NULL;
+	this->skillComponent = NULL;
 }
 Entity::Entity()
 {
@@ -17,6 +19,7 @@ Entity::~Entity()
 	delete this->movementcomponent;
 	delete this->animationComponent;
 	delete this->attributeComponent;
+	delete this->skillComponent;
 }
 
 //Component Function
@@ -46,6 +49,11 @@ void Entity::createAnimationComponent( sf::Texture& texture_sheet)
 void Entity::createAttributeComponent(const unsigned level)
 {
 	this->attributeComponent = new AttributeComponent(level);
+}
+
+void Entity::createSkillComponent()
+{
+
 }
 
 
