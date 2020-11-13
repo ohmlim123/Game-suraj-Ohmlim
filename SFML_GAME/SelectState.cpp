@@ -143,17 +143,17 @@ void SelectState::updateGui(const float& dt)
 	}
 	if (this->buttons["LEVEL1"]->isPressed())
 	{
-		this->states->push(new GameState(this->stateData));
+		this->states->push(new GameState(this->stateData,1));
 	}
 
 	if (this->buttons["LEVEL2"]->isPressed())
 	{
-		
+		this->states->push(new GameState(this->stateData, 2));
 	}
 
 	if (this->buttons["LEVEL3"]->isPressed())
 	{
-		
+		this->states->push(new GameState(this->stateData, 3));
 	}
 
 	if (this->buttons["BACK"]->isPressed())

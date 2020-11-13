@@ -26,7 +26,18 @@ void EditorState::initView()
 
 void EditorState::initBackground()
 {
-	
+	const sf::VideoMode& vm = this->stateData->gfxSettings->resolution;
+
+	//BackGround
+	this->background.setSize(
+		sf::Vector2f(
+			static_cast<float>(vm.width),
+			static_cast<float>(vm.height)));
+
+	this->backgroundTexture.loadFromFile("Resources/Images/background/cloud.png");
+
+
+	this->background.setTexture(&this->backgroundTexture);
 }
 
 void EditorState::initFonts()
@@ -40,6 +51,7 @@ void EditorState::initFonts()
 void EditorState::initText()
 {
 	
+
 	this->cursorText.setFont(this->font);
 	this->cursorText.setFillColor(sf::Color::White);
 	this->cursorText.setCharacterSize(12);
@@ -125,6 +137,7 @@ void EditorState::initTileMap()
 EditorState::EditorState(StateData* state_data)
 	:State(state_data)
 {
+	this->initBackground();
 	this->initVariables();
 	this->initView();
 	this->initBackground();
@@ -301,11 +314,11 @@ void EditorState::updatePauseMenuButtons()
 	if (this->pmenu->isButtonPressed("QUIT"))
 		this->endState();
 
-	if (this->pmenu->isButtonPressed("QUIT"))
-		this->tileMap->saveToFile("text.slmp");
+	if (this->pmenu->isButtonPressed("SAVE"))
+		this->tileMap->saveToFile("text2.slmp");
 
 	if (this->pmenu->isButtonPressed("LOAD"))
-		this->tileMap->loadFromFile("text.slmp");
+		this->tileMap->loadFromFile("text2.slmp");
 }
 
 void EditorState::update(const float& dt)
@@ -361,9 +374,12 @@ void EditorState::renderGui(sf::RenderTarget& target)
 
 void EditorState::render(sf::RenderTarget* target)
 {
+	
+
 	if (!target)
 		target = this->window;
-	
+
+	target->draw(this->background);
 
 	
 	target->setView(this->view);
@@ -372,6 +388,8 @@ void EditorState::render(sf::RenderTarget* target)
 
 	target->setView(this->window->getDefaultView());
 	this->renderButtons(*target);
+
+	
 
 	this->renderGui(*target);
 
@@ -382,6 +400,6 @@ void EditorState::render(sf::RenderTarget* target)
 		this->pmenu->render(*target);
 	}
 	
-
+	
 	
 }

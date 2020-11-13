@@ -20,6 +20,8 @@ private:
 	float maxVelocity;
 	float acceleration;
 	float deceleration;
+	float gravity;
+	
 
 
 	sf::Vector2f velocity;
@@ -37,10 +39,15 @@ public:
 	const sf::Vector2f& getVelocity() const;
 
 	//Function
+	
 	const bool getState(const short unsigned state) const;
 	void stopVelocity();
 	void stopVelocityX();
 	void stopVelocityY();
+	void updategravity();
+	void jump(float jump_high);
+	const float get_gravity();
+	void set_gravity(float gravitate);
 	
 	
 	

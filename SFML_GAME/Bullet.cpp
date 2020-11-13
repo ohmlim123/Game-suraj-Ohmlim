@@ -1,30 +1,33 @@
 #include "stdafx.h"
 #include "Bullet.h"
 
-/*Bullet::Bullet(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, sf::Vector2f position)
-	:animation(texture,imageCount,switchTime)
+
+Bullet::Bullet(float x, float y,float z)
 {
-	body.setSize(sf::Vector2f(10.f, 10.f));
-	body.setOrigin(body.getSize() / 2.f);
-	body.setPosition(position);
-	body.setTexture(texture);
+	this->texture_bullet.loadFromFile("Resources/Images/Sprite/bullet/bullet2.png");
+	this->sword_wave.setPosition(x, y);
+	this->sword_wave.setTexture(texture_bullet);
+	direction = z;	
+	this->sword_wave.setScale(1* direction, 2);
+	 
 
+	speed = 10.f;
+	
+}
 
-}	
-
-
-
-
-
-void Bullet::updateBullet(float dt)
+Bullet::~Bullet()
 {
-	velocity.x = 500.f;
-	//body.setTextureRect(animation.uvRect);
-	body.move(velocity * dt);
 
 }
 
-void Bullet::Draw(sf::RenderWindow& window)
+void Bullet::update()
 {
-	window.draw(body);
-}*/
+	this->sword_wave.move(direction * speed, 0.f);
+}
+
+void Bullet::render(sf::RenderTarget& target)
+{
+
+
+	target.draw(sword_wave);
+}

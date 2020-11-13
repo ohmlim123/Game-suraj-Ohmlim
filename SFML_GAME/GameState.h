@@ -6,7 +6,8 @@
 #include"PauseMenu.h"
 #include"TileMap.h"
 #include"PlayerGui.h"
-#include"Bow.h"
+#include"Bullet.h"
+
 
 
 
@@ -25,6 +26,11 @@ class GameState :
 {
 private:
 
+	float down_timer;
+	float bullet_timer;
+
+	float direction;
+
 	sf::View view;
 	sf::Vector2i viewGridPosition;
 	sf::RenderTexture renderTexture;
@@ -39,6 +45,7 @@ private:
 	PlayerGui* playerGui;
 	sf::Texture texture;
 
+	std::vector<Bullet*> bullets;
 
 	TileMap* tileMap;
 
@@ -52,10 +59,10 @@ private:
 	void initShader();
 	void initPlayers();
 	void initPlayerGui();
-	void initTileMap();
+	void initTileMap(std::string Map_name);
 	
 public :
-	GameState(StateData* state_data);
+	GameState(StateData* state_data,int stage_number);
 	virtual ~GameState();
 	
 	

@@ -7,6 +7,7 @@ void Entity::iniVarialbe()
 	this->animationComponent = NULL;
 	this->attributeComponent = NULL;
 	this->skillComponent = NULL;
+	this->Can_jump = false;
 }
 Entity::Entity()
 {
@@ -134,6 +135,26 @@ void Entity::stopVelocityY()
 {
 	if (this->movementcomponent)
 		this->movementcomponent->stopVelocityY();
+}
+
+const bool Entity::get_can_jump()
+{
+	return this->Can_jump;
+}
+
+void Entity::set_can_jump(bool Getcanjump)
+{
+	this->Can_jump = Getcanjump;
+}
+
+const float Entity::get_gravity()
+{
+	return this->movementcomponent->get_gravity();
+}
+
+void Entity::set_gravity(float gravitate)
+{
+	this->movementcomponent->set_gravity(gravitate);
 }
 
 void Entity::update(const float& dt)

@@ -22,7 +22,8 @@ private:
 	
 	sf::View view;
 	
-
+	sf::Texture backgroundTexture;
+	sf::RectangleShape background;
 	sf::Font font;
 	sf::Text cursorText;
 	

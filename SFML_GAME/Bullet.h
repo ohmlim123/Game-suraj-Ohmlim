@@ -1,28 +1,21 @@
 #pragma once
-#include"stdafx.h"
-#include"AnimationComponent.h"
-#include"MovementComponent.h"
 class Bullet
 {
+private:
+	
+	sf::Texture texture_bullet;
+	sf::Sprite sword_wave;
+
+	float direction;
+	float speed;
+	 
 
 public:
-	Bullet(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, sf::Vector2f position);
-	void updateBullet(float dt);
-	void Draw(sf::RenderWindow& window);
-	void SetPosition(sf::Vector2f(position))
-	{
-		body.setPosition(position);
-	}
-
-private:
-	sf::RectangleShape body;
-	sf::RectangleShape texture;
-	AnimationComponent animation;
-	unsigned int row;
-	sf::Vector2f velocity;
+	Bullet(float x,float y,float z);
+	virtual ~Bullet();
 
 
-
-
+	void update();
+	void render(sf::RenderTarget& target);
 };
 

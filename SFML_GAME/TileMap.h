@@ -4,7 +4,7 @@
 
 #include"Tile.h"
 #include"Entity.h"
-
+#include"MovementComponent.h"
 
 class Tile;
 class Entity;

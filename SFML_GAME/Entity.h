@@ -28,6 +28,9 @@ protected:
 	AttributeComponent* attributeComponent;
 	SkillComponent* skillComponent;
 
+
+	bool Can_jump;
+
 public:
 
 	Entity();
@@ -60,7 +63,10 @@ public:
 	virtual void stopVelocity();
 	virtual void stopVelocityX();
 	virtual void stopVelocityY();
-
+	const bool  get_can_jump();
+	void set_can_jump(bool Getcanjump);
+	const float get_gravity();
+	void set_gravity(float gravitate);
 
 	virtual void update(const float& dt) = 0;
 	virtual void render(sf::RenderTarget& target) = 0;

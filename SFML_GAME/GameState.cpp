@@ -109,16 +109,18 @@ void GameState::initPlayerGui()
 	this->playerGui = new PlayerGui(this->player,this->stateData->gfxSettings->resolution);
 }
 
-void GameState::initTileMap()
+void GameState::initTileMap(std::string Map_name)
 {
 	
-	this->tileMap = new TileMap("text.slmp");
+	this->tileMap = new TileMap(Map_name);
+
 }
 
 //Contructor / Destructors
-GameState::GameState(StateData* state_data)
+GameState::GameState(StateData* state_data, int stage_number)
 	:State(state_data)
 {
+	this->down_timer = 0;
 	this->initDefferedRender();
 	this->initView();
 	this->initKeybinds();
@@ -128,9 +130,17 @@ GameState::GameState(StateData* state_data)
 
 	this->initPlayers();
 	this->initPlayerGui();
-	this->initTileMap();
+	if (stage_number == 1)
+	{
+		this->initTileMap("text.slmp");
+	}
+	else if (stage_number == 2)
+	{
+		this->initTileMap("text2.slmp");
+	}
 
-	Bow bow;
+
+	
 }
 GameState::~GameState()
 {
@@ -202,24 +212,35 @@ void GameState::updatePlayerInput(const float& dt)
 
 	//Update player Input
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_LEFT"))))
-		this->player->move( -1.f, 0.f,dt);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_RIGHT"))))
-		this->player->move( 1.f, 0.f, dt);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_UP"))))
 	{
-		this->player->move(0.f, -1.f, dt);
-		
-		
-	}
-		
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_DOWN"))))
-	{
-		this->player->move(0.f, 1.f, dt);
-		
-		
-	}
-		
+		direction = -1.f;
+		this->player->move(-1.f, 0.f, dt);
 
+	}
+		
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_RIGHT"))))
+	{
+		direction = 1.f;
+		this->player->move(1.f, 0.f, dt);
+	}
+	
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_UP"))) && this->player->get_can_jump())
+	{
+
+		this->player->set_can_jump(false);
+		this->player->jump();
+		this->down_timer = 0.f;
+	}
+		
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K) && bullet_timer >= 100.f)
+	{
+
+		//std::cout << "SHOOT" << "\n";
+		this->bullets.push_back(new Bullet(this->player->getPosition().x + 100.f, this->player->getPosition().y,direction));
+
+		bullet_timer = 0.f;
+	}
 	
 	
 
@@ -257,6 +278,21 @@ void GameState::update(const float& dt)
 
 		this->updateTileMap(dt);
 
+		down_timer++;
+
+		if (down_timer >= 50 && this->player->get_can_jump() == false)
+		{
+			this->player->set_gravity(10.f);
+			down_timer = 0;
+		}
+		bullet_timer++;
+		
+
+		for (int i = 0;i < bullets.size();i++)
+		{
+			this->bullets[i]->update();
+		}
+
 		this->player->update(dt);
 		
 		this->playerGui->update(dt);
@@ -286,11 +322,17 @@ void GameState::render(sf::RenderTarget* target)
 		);
 
 		this->player->render(this->renderTexture);
+		for (int i = 0;i < bullets.size();i++)
+		{
+			std::cout << "RENDER " << i << "\n";
+			this->bullets[i]->render(this->renderTexture);
+		}
 	
 		this->tileMap->renderDefferred(this->renderTexture);
 
 		this->renderTexture.setView(this->renderTexture.getDefaultView());
 		this->playerGui->render(this->renderTexture);
+		
 
 		//Render GUI
 		if (this->paused) // Puase maenu render

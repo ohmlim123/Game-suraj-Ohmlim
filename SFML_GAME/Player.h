@@ -12,6 +12,8 @@ class Player :
 private:
     //Variable
     bool attacking;
+
+    float jump_high;
     
 
     //Initializer Function
@@ -34,6 +36,10 @@ public:
     void updateAttack();
     void updateAnimation(const float& dt);
     void update(const float& dt);
+    void jump( );
+
+    
+
 
     void render(sf::RenderTarget& target);
 

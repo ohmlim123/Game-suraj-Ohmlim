@@ -1,5 +1,6 @@
 #include"stdafx.h"
 #include "TileMap.h"
+#include"MovementComponent.h"
 
 void TileMap::clear()
 {
@@ -402,6 +403,9 @@ void TileMap::updateCollision(Entity* entity , const float& dt)
 						{
 							entity->stopVelocityY();
 							entity->setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
+							entity->set_can_jump(true);
+							entity->set_gravity(0.f);
+							
 
 						}
 						//Top collision
@@ -411,6 +415,7 @@ void TileMap::updateCollision(Entity* entity , const float& dt)
 							&& playerBounds.left + playerBounds.width > wallBounds.left
 							)
 						{
+							
 							entity->stopVelocityY();
 							entity->setPosition(playerBounds.left, wallBounds.top + wallBounds.height);
 
@@ -460,7 +465,7 @@ void TileMap::render(sf::RenderTarget& target,const sf::Vector2i& gridPosition)
 
 		this->layer = 0;
 
-		this->fromX = gridPosition.x - 15;
+		this->fromX = gridPosition.x - 6;
 		//this->fromX = gridPosition.x - 4;
 		if (this->fromX < 0)
 			this->fromX = 0;
@@ -468,21 +473,21 @@ void TileMap::render(sf::RenderTarget& target,const sf::Vector2i& gridPosition)
 			this->fromX = this->maxSizeWorldGrid.x;
 
 		//this->toX = gridPosition.x + 5;
-		this->toX = gridPosition.x + 16;
+		this->toX = gridPosition.x + 8;
 		if (this->toX < 0)
 			this->toX = 0;
 		else if (this->toX > this->maxSizeWorldGrid.x)
 			this->toX = this->maxSizeWorldGrid.x;
 
 		//this->fromY = gridPosition.y - 3;
-		this->fromY = gridPosition.y - 8;
+		this->fromY = gridPosition.y - 6;
 		if (this->fromY < 0)
 			this->fromY = 0;
 		else if (this->fromY > this->maxSizeWorldGrid.y)
 			this->fromY = this->maxSizeWorldGrid.y;
 
 		//this->toY = gridPosition.y + 5;
-		this->toY = gridPosition.y +10 ;
+		this->toY = gridPosition.y + 8 ;
 		if (this->toY < 0)
 			this->toY = 0;
 		else if (this->toY > this->maxSizeWorldGrid.y)

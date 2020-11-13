@@ -7,6 +7,7 @@ void Player::initVariables()
 	this->attacking = false;
 	this->sprite.setOrigin(115.f, 0.f);
 	this->sprite.setScale(-2.f, 2.f);
+	this->jump_high = 500.f;
 }
 
 void Player::initComponents()
@@ -157,6 +158,12 @@ void Player::update(const float& dt)
 
 		this->hitboxComponent->update();
 		
+}
+
+void Player::jump()
+{
+
+	this->movementcomponent->jump(this->jump_high);
 }
 
 void Player::render(sf::RenderTarget& target)
