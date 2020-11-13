@@ -110,8 +110,8 @@ void GameState::initPlayerGui()
 
 void GameState::initTileMap()
 {
-	this->tileMap = new TileMap(this->stateData->gridSize, 100, 100,"Resources/Images/Tile/tileofmap2.png");
-	this->tileMap->loadFromFile("text.slmp");
+	
+	this->tileMap = new TileMap("text.slmp");
 }
 
 //Contructor / Destructors
@@ -128,6 +128,8 @@ GameState::GameState(StateData* state_data)
 	this->initPlayers();
 	this->initPlayerGui();
 	this->initTileMap();
+
+	Bow bow;
 }
 GameState::~GameState()
 {
@@ -145,26 +147,40 @@ void GameState::updateView(const float& dt)
 		std::floor(this->player->getPosition().x ),
 		std::floor (this->player->getPosition().y)
 	);
+	
+	
 
-	if (this->view.getCenter().x - this->view.getSize().x / 2.f < 0.f)
+
+	if (this->view.getSize().x >= this->view.getSize().x)
 	{
-		this->view.setCenter(0.f + this->view.getSize().x / 2.f, this->view.getCenter().y);
+		if (this->view.getCenter().x - this->view.getSize().x / 2.f < 0.f)
+		{
+			this->view.setCenter(0.f + this->view.getSize().x / 2.f, this->view.getCenter().y);
+		}
+		else if (this->view.getCenter().x + this->view.getSize().x / 2.f > this->tileMap->getMaxSizeF().x)
+		{
+			this->view.setCenter(this->tileMap->getMaxSizeF().x - this->view.getSize().x / 2.f, this->view.getCenter().y);
+		}
 	}
-	else if(this->view.getCenter().x + this->view.getSize().x / 2.f > this->tileMap->getMaxSizeF().x)
+	if (this->view.getSize().y >= this->view.getSize().y)
 	{
-		this->view.setCenter(this->tileMap->getMaxSizeF().x - this->view.getSize().x / 2.f, this->view.getCenter().y);
+		if (this->view.getCenter().y - this->view.getSize().y / 2.f < 0.f)
+		{
+			this->view.setCenter(this->view.getCenter().x, 0.f + this->view.getSize().y / 2.f);
+		}
+		else if (this->view.getCenter().y + this->view.getSize().y / 2.f > this->tileMap->getMaxSizeF().x)
+		{
+			this->view.setCenter(this->view.getCenter().x, this->tileMap->getMaxSizeF().x - this->view.getSize().y / 2.f);
+		}
 	}
-	if (this->view.getCenter().y - this->view.getSize().y / 2.f < 0.f)
-	{
-		this->view.setCenter( this->view.getCenter().x ,0.f +  this->view.getSize().y / 2.f);
-	}
-	else if (this->view.getCenter().y + this->view.getSize().y / 2.f > this->tileMap->getMaxSizeF().x)
-	{
-		this->view.setCenter( this->view.getCenter().x , this->tileMap->getMaxSizeF().x - this->view.getSize().y / 2.f);
-	}
+
+	
 
 	this->viewGridPosition.x = static_cast<int>(this->view.getCenter().x) / static_cast<int>(this->stateData->gridSize);
 	this->viewGridPosition.y = static_cast<int>(this->view.getCenter().y) / static_cast<int>(this->stateData->gridSize);
+
+
+
 
 
 }
