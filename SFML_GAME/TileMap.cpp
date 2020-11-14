@@ -405,9 +405,13 @@ void TileMap::updateCollision(Entity* entity , const float& dt)
 							entity->setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
 							entity->set_can_jump(true);
 							entity->set_gravity(0.f);
-							
+
 
 						}
+
+						//Walk Space
+
+
 						//Top collision
 						else if (playerBounds.top > wallBounds.top
 							&& playerBounds.top + playerBounds.height > wallBounds.top + wallBounds.height
@@ -444,13 +448,19 @@ void TileMap::updateCollision(Entity* entity , const float& dt)
 							entity->setPosition(wallBounds.left + wallBounds.width, playerBounds.top);
 						}
 
-				}
+				    }
+					
 			}
 
 		}
 	}
 
 
+
+}
+
+void TileMap::update_normal_tile(const float& dt, Entity* entity, sf::FloatRect player_bounds, sf::FloatRect wall_bounds)
+{
 
 }
 

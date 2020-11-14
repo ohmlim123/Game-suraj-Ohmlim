@@ -16,6 +16,8 @@ private:
     float jump_high;
     
 
+    bool status_on_the_Rock;
+
     //Initializer Function
     void initVariables();
     void initComponents();

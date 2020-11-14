@@ -6,6 +6,8 @@
 #include"Entity.h"
 #include"MovementComponent.h"
 
+
+
 class Tile;
 class Entity;
 
@@ -57,6 +59,7 @@ public:
 	void loadFromFile(const std::string file_name);
 
 	void updateCollision(Entity* entity, const float& dt);
+	void update_normal_tile(const float& dt, Entity* entity, sf::FloatRect player_bounds, sf::FloatRect wall_bounds);
 
 	void update();
 	void render(sf::RenderTarget& target,const sf::Vector2i& gridPosition);

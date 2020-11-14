@@ -7,7 +7,7 @@ void EditorState::initVariables()
 	this->textureRect = sf::IntRect(0,0,static_cast<int>(this->stateData->gridSize), static_cast<int>(this->stateData->gridSize));
 	this->collision = false;
 	this->type = TileTypes::DEFAULT;
-	this->cameraSpeed = 100.f;
+	this->cameraSpeed = 500.f;
 	this->layer = 0;
 	this->tileAddLock = false;
 
@@ -315,10 +315,10 @@ void EditorState::updatePauseMenuButtons()
 		this->endState();
 
 	if (this->pmenu->isButtonPressed("SAVE"))
-		this->tileMap->saveToFile("text2.slmp");
+		this->tileMap->saveToFile("text.slmp");
 
 	if (this->pmenu->isButtonPressed("LOAD"))
-		this->tileMap->loadFromFile("text2.slmp");
+		this->tileMap->loadFromFile("text.slmp");
 }
 
 void EditorState::update(const float& dt)

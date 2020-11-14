@@ -233,7 +233,7 @@ void GameState::updatePlayerInput(const float& dt)
 		this->down_timer = 0.f;
 	}
 		
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K) && bullet_timer >= 100.f)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K) && bullet_timer >= 50.f)
 	{
 
 		//std::cout << "SHOOT" << "\n";
@@ -282,7 +282,7 @@ void GameState::update(const float& dt)
 
 		if (down_timer >= 50 && this->player->get_can_jump() == false)
 		{
-			this->player->set_gravity(10.f);
+			this->player->set_gravity(12.f);
 			down_timer = 0;
 		}
 		bullet_timer++;

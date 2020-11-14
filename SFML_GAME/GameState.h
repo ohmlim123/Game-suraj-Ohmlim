@@ -57,7 +57,7 @@ private:
 	void initTextures();
 	void initPauseMenu();
 	void initShader();
-	void initPlayers();
+	void initPlayers(); 
 	void initPlayerGui();
 	void initTileMap(std::string Map_name);
 	
