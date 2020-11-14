@@ -2,7 +2,11 @@
 #define TILE_H
 
 
-enum TileTypes {DEFAULT = 0, DAMAGING,DOODAD};
+enum TileTypes {
+	DEFAULT = 0, 
+	DAMAGING,
+	DOODAD,
+	JUMP_HIGH};
 
 
 class Tile
@@ -24,6 +28,7 @@ public:
 	//Accessors
 
 	const short& getType() const;
+
 
 	//Function
 

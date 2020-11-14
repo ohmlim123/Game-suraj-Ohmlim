@@ -30,6 +30,7 @@ protected:
 
 
 	bool Can_jump;
+	float jump_height;
 
 public:
 
@@ -65,8 +66,12 @@ public:
 	virtual void stopVelocityY();
 	const bool  get_can_jump();
 	void set_can_jump(bool Getcanjump);
+	const float get_jump_height() const;
 	const float get_gravity();
 	void set_gravity(float gravitate);
+
+	void jumpEntity(float jump_height);
+	void bounce(const float dir_x, const float dir_y, const float x_force, const float y_force, const float& dt);
 
 	virtual void update(const float& dt) = 0;
 	virtual void render(sf::RenderTarget& target) = 0;

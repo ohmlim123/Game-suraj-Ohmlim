@@ -63,9 +63,9 @@ TileMap::TileMap(float gridSize, int width, int height, std::string texture_file
 		std::cout << "ERROR::TILEMAP:FAIL TO LOAD TEXTURESHEET :: FILENAME" << texture_file << "\n";
 
 	this->collisionBox.setSize(sf::Vector2f(gridSize, gridSize));
-	this->collisionBox.setFillColor(sf::Color(255, 0, 0, 50));
-	this->collisionBox.setOutlineColor(sf::Color::Red);
-	this->collisionBox.setOutlineThickness(1.f);
+	this->collisionBox.setFillColor(sf::Color::Transparent);
+	this->collisionBox.setOutlineColor(sf::Color::Transparent);
+	//this->collisionBox.setOutlineThickness(0.f);
 }
 
 TileMap::TileMap(const std::string file_name)
@@ -82,9 +82,9 @@ TileMap::TileMap(const std::string file_name)
 
 
 	this->collisionBox.setSize(sf::Vector2f(this->gridSizeF, this->gridSizeF));
-	this->collisionBox.setFillColor(sf::Color(255, 0, 0, 50));
-	this->collisionBox.setOutlineColor(sf::Color::Red);
-	this->collisionBox.setOutlineThickness(1.f);
+	this->collisionBox.setFillColor(sf::Color::Transparent);
+	this->collisionBox.setOutlineColor(sf::Color::Transparent);
+	//this->collisionBox.setOutlineThickness(1.f);
 }
 
 TileMap::~TileMap()
@@ -394,60 +394,15 @@ void TileMap::updateCollision(Entity* entity , const float& dt)
 						this->map[x][y][this->layer][k]->intersects(nextPositionBounds))
 					{
 
-						//Bottom Collision
-						if (playerBounds.top < wallBounds.top
-							&& playerBounds.top + playerBounds.height < wallBounds.top + wallBounds.height
-							&& playerBounds.left <  wallBounds.left + wallBounds.width
-							&& playerBounds.left + playerBounds.width > wallBounds.left
-							)
+						switch (this->map[x][y][this->layer][k]->getType())
 						{
-							entity->stopVelocityY();
-							entity->setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
-							entity->set_can_jump(true);
-							entity->set_gravity(0.f);
-
-
+						case TileTypes::DEFAULT:
+							this->update_normal_tile(dt, entity, playerBounds, wallBounds);
+							break;
+						case TileTypes::JUMP_HIGH:
+							this->update_jump_tile(dt, entity, playerBounds, wallBounds);
+							break;
 						}
-
-						//Walk Space
-
-
-						//Top collision
-						else if (playerBounds.top > wallBounds.top
-							&& playerBounds.top + playerBounds.height > wallBounds.top + wallBounds.height
-							&& playerBounds.left <  wallBounds.left + wallBounds.width
-							&& playerBounds.left + playerBounds.width > wallBounds.left
-							)
-						{
-							
-							entity->stopVelocityY();
-							entity->setPosition(playerBounds.left, wallBounds.top + wallBounds.height);
-
-						}
-
-						//Right collision
-						if (playerBounds.left < wallBounds.left
-							&& playerBounds.left + playerBounds.width < wallBounds.left + wallBounds.width
-							&& playerBounds.top <  wallBounds.top + wallBounds.height
-							&& playerBounds.top + playerBounds.height > wallBounds.top
-							)
-						{
-							entity->stopVelocityX();
-							entity->setPosition(wallBounds.left - playerBounds.width, playerBounds.top);
-
-						}
-
-						//Left collision
-						else if (playerBounds.left > wallBounds.left
-							&& playerBounds.left + playerBounds.width > wallBounds.left + wallBounds.width
-							&& playerBounds.top <  wallBounds.top + wallBounds.height
-							&& playerBounds.top + playerBounds.height > wallBounds.top
-							)
-						{
-							entity->stopVelocityX();
-							entity->setPosition(wallBounds.left + wallBounds.width, playerBounds.top);
-						}
-
 				    }
 					
 			}
@@ -459,8 +414,119 @@ void TileMap::updateCollision(Entity* entity , const float& dt)
 
 }
 
-void TileMap::update_normal_tile(const float& dt, Entity* entity, sf::FloatRect player_bounds, sf::FloatRect wall_bounds)
+void TileMap::update_normal_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds)
 {
+	//Bottom Collision
+	if (playerBounds.top < wallBounds.top
+		&& playerBounds.top + playerBounds.height < wallBounds.top + wallBounds.height
+		&& playerBounds.left <  wallBounds.left + wallBounds.width - 1
+		&& playerBounds.left + playerBounds.width > wallBounds.left + 1
+		)
+	{
+		entity->stopVelocityY();
+		entity->setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
+		entity->set_can_jump(true);
+		entity->set_gravity(0.f);
+
+
+	}
+
+	//Walk Space
+
+
+	//Top collision
+	else if (playerBounds.top > wallBounds.top
+		&& playerBounds.top + playerBounds.height > wallBounds.top + wallBounds.height
+		&& playerBounds.left <  wallBounds.left + wallBounds.width - 1
+		&& playerBounds.left + playerBounds.width > wallBounds.left + 1
+		)
+	{
+
+		entity->stopVelocityY();
+		entity->setPosition(playerBounds.left, wallBounds.top + wallBounds.height);
+
+	}
+
+	//Right collision
+	if (playerBounds.left < wallBounds.left
+		&& playerBounds.left + playerBounds.width < wallBounds.left + wallBounds.width
+		&& playerBounds.top <  wallBounds.top + wallBounds.height - 1
+		&& playerBounds.top + playerBounds.height > wallBounds.top + 1
+		)
+	{
+		entity->stopVelocityX();
+		entity->setPosition(wallBounds.left - playerBounds.width, playerBounds.top);
+
+	}
+
+	//Left collision
+	else if (playerBounds.left > wallBounds.left
+		&& playerBounds.left + playerBounds.width > wallBounds.left + wallBounds.width
+		&& playerBounds.top <  wallBounds.top + wallBounds.height - 1
+		&& playerBounds.top + playerBounds.height > wallBounds.top + 1
+		)
+	{
+		entity->stopVelocityX();
+		entity->setPosition(wallBounds.left + wallBounds.width, playerBounds.top);
+	}
+}
+
+void TileMap::update_jump_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds)
+{
+	//Bottom Collision
+	if (playerBounds.top < wallBounds.top
+		&& playerBounds.top + playerBounds.height < wallBounds.top + wallBounds.height
+		&& playerBounds.left <  wallBounds.left + wallBounds.width - 1
+		&& playerBounds.left + playerBounds.width > wallBounds.left + 1
+		)
+	{
+		entity->stopVelocityY();
+		entity->setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
+		entity->bounce(0.f, -1.f, 0.f, entity->get_jump_height() * 2.f, dt);
+		entity->set_can_jump(true);
+		
+
+
+	}
+
+	//Walk Space
+
+
+	//Top collision
+	else if (playerBounds.top > wallBounds.top
+		&& playerBounds.top + playerBounds.height > wallBounds.top + wallBounds.height
+		&& playerBounds.left <  wallBounds.left + wallBounds.width - 1
+		&& playerBounds.left + playerBounds.width > wallBounds.left + 1
+		)
+	{
+
+		entity->stopVelocityY();
+		entity->setPosition(playerBounds.left, wallBounds.top + wallBounds.height);
+
+	}
+
+	//Right collision
+	if (playerBounds.left < wallBounds.left
+		&& playerBounds.left + playerBounds.width < wallBounds.left + wallBounds.width
+		&& playerBounds.top <  wallBounds.top + wallBounds.height - 1
+		&& playerBounds.top + playerBounds.height > wallBounds.top + 1
+		)
+	{
+		entity->stopVelocityX();
+		entity->setPosition(wallBounds.left - playerBounds.width, playerBounds.top);
+
+	}
+
+	//Left collision
+	else if (playerBounds.left > wallBounds.left
+		&& playerBounds.left + playerBounds.width > wallBounds.left + wallBounds.width
+		&& playerBounds.top <  wallBounds.top + wallBounds.height - 1
+		&& playerBounds.top + playerBounds.height > wallBounds.top + 1
+		)
+	{
+		entity->stopVelocityX();
+		entity->setPosition(wallBounds.left + wallBounds.width, playerBounds.top);
+	}
 
 }
 

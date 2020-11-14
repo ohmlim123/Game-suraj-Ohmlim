@@ -46,6 +46,7 @@ public:
 	void stopVelocityY();
 	void updategravity();
 	void jump(float jump_high);
+	void bounce(const float dir_x, const float dir_y, const float x_force, const float y_force, const float& dt);
 	const float get_gravity();
 	void set_gravity(float gravitate);
 	

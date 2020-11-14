@@ -8,6 +8,9 @@ void Entity::iniVarialbe()
 	this->attributeComponent = NULL;
 	this->skillComponent = NULL;
 	this->Can_jump = false;
+
+	this->jump_height = 5000.f;
+
 }
 Entity::Entity()
 {
@@ -147,6 +150,11 @@ void Entity::set_can_jump(bool Getcanjump)
 	this->Can_jump = Getcanjump;
 }
 
+const float Entity::get_jump_height() const
+{
+	return this->jump_height;
+}
+
 const float Entity::get_gravity()
 {
 	return this->movementcomponent->get_gravity();
@@ -155,6 +163,21 @@ const float Entity::get_gravity()
 void Entity::set_gravity(float gravitate)
 {
 	this->movementcomponent->set_gravity(gravitate);
+}
+
+void Entity::jumpEntity(float jump_height)
+{
+	if (this->movementcomponent)
+	{
+		this->movementcomponent->jump(jump_height);
+	}
+}
+
+void Entity::bounce(const float dir_x, const float dir_y, const float x_force, const float y_force, const float& dt)
+{
+	if (this->movementcomponent) {
+		this->movementcomponent->bounce(dir_x, dir_y, x_force, y_force, dt);
+	}
 }
 
 void Entity::update(const float& dt)

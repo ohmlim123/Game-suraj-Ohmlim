@@ -5,7 +5,7 @@ MovementComponent::MovementComponent(sf::Sprite& sprite ,
 	float maxVelocity, float acceleration , float deceleration)
 	: sprite(sprite), maxVelocity(maxVelocity), acceleration(acceleration), deceleration(deceleration)
 {
-	this->gravity = 10.f;
+	this->gravity = 100.f;
 }
 
 MovementComponent::~MovementComponent()
@@ -113,6 +113,12 @@ void MovementComponent::updategravity()
 void MovementComponent::jump(float jump_high)
 {
 	this->velocity.y -= jump_high;
+}
+
+void MovementComponent::bounce(const float dir_x, const float dir_y, const float x_force, const float y_force, const float& dt)
+{
+	this->velocity.x += x_force * dir_x;
+	this->velocity.y += y_force * dir_y;
 }
 
 const float MovementComponent::get_gravity()

@@ -20,8 +20,8 @@ void EditorState::initView()
 		static_cast<int>(this->stateData->gfxSettings->resolution.height)));
 
 		this->view.setCenter(
-			static_cast<int>(this->stateData->gfxSettings->resolution.width) / 2.f,
-			static_cast<int>(this->stateData->gfxSettings->resolution.height) / 2.f);
+			static_cast<int>(this->stateData->gfxSettings->resolution.width)  / 2,
+			static_cast<int>(this->stateData->gfxSettings->resolution.height) / 2);
 }
 
 void EditorState::initBackground()
@@ -34,7 +34,7 @@ void EditorState::initBackground()
 			static_cast<float>(vm.width),
 			static_cast<float>(vm.height)));
 
-	this->backgroundTexture.loadFromFile("Resources/Images/background/cloud.png");
+	this->backgroundTexture.loadFromFile("Resources/Images/background/blue.png");
 
 
 	this->background.setTexture(&this->backgroundTexture);

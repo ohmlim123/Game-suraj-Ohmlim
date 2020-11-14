@@ -228,9 +228,9 @@ void GameState::updatePlayerInput(const float& dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_UP"))) && this->player->get_can_jump())
 	{
 
+		this->player->jumpEntity(this->player->get_jump_height());
 		this->player->set_can_jump(false);
-		this->player->jump();
-		this->down_timer = 0.f;
+		
 	}
 		
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K) && bullet_timer >= 50.f)
