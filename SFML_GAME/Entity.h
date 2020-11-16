@@ -70,7 +70,7 @@ public:
 	const float get_gravity();
 	void set_gravity(float gravitate);
 
-	void jumpEntity(float jump_height);
+	void jump(float jump_height);
 	void bounce(const float dir_x, const float dir_y, const float x_force, const float y_force, const float& dt);
 
 	virtual void update(const float& dt) = 0;

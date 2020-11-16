@@ -60,14 +60,8 @@ void GameState::initKeybinds()
 
 			this->keybinds[key] = this->supportedKeys->at(key2);
 		}
-
 	}
-
-
-
-	ifs.close();
-
-	
+	ifs.close();	
 }
 
 void GameState::initFonts()
@@ -137,6 +131,10 @@ GameState::GameState(StateData* state_data, int stage_number)
 	else if (stage_number == 2)
 	{
 		this->initTileMap("text2.slmp");
+	}
+	else if (stage_number == 3)
+	{
+		this->initTileMap("Map_1.slmp");
 	}
 
 
@@ -227,10 +225,11 @@ void GameState::updatePlayerInput(const float& dt)
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_UP"))) && this->player->get_can_jump())
 	{
-
-		this->player->jumpEntity(this->player->get_jump_height());
+		this->player->jump(this->player->get_jump_height());
 		this->player->set_can_jump(false);
-		
+
+
+		this->player->set_gravity(0.f);
 	}
 		
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K) && bullet_timer >= 50.f)
@@ -278,13 +277,15 @@ void GameState::update(const float& dt)
 
 		this->updateTileMap(dt);
 
-		down_timer++;
+		
 
-		if (down_timer >= 50 && this->player->get_can_jump() == false)
-		{
-			this->player->set_gravity(12.f);
-			down_timer = 0;
-		}
+		
+		this->player->get_jump_height();
+		
+		this->player->set_gravity(10.f);
+
+		
+
 		bullet_timer++;
 		
 
@@ -322,6 +323,7 @@ void GameState::render(sf::RenderTarget* target)
 		);
 
 		this->player->render(this->renderTexture);
+
 		for (int i = 0;i < bullets.size();i++)
 		{
 			std::cout << "RENDER " << i << "\n";

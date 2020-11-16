@@ -16,7 +16,7 @@ private:
     float jump_high;
     
 
-    bool status_on_the_Rock;
+   
 
     //Initializer Function
     void initVariables();
@@ -38,7 +38,7 @@ public:
     void updateAttack();
     void updateAnimation(const float& dt);
     void update(const float& dt);
-    void jump( );
+  
 
     
 

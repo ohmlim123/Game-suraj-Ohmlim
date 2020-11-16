@@ -9,7 +9,7 @@ void Entity::iniVarialbe()
 	this->skillComponent = NULL;
 	this->Can_jump = false;
 
-	this->jump_height = 5000.f;
+	this->jump_height = 550.f;
 
 }
 Entity::Entity()
@@ -165,7 +165,7 @@ void Entity::set_gravity(float gravitate)
 	this->movementcomponent->set_gravity(gravitate);
 }
 
-void Entity::jumpEntity(float jump_height)
+void Entity::jump(float jump_height)
 {
 	if (this->movementcomponent)
 	{

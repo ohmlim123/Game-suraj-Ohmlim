@@ -20,6 +20,11 @@ Bullet::~Bullet()
 
 }
 
+void Bullet::createHitboxComponent(sf::Sprite& sprite, float offset_x, float offset_y, float width, float height)
+{
+	this->hitboxComponent = new HitboxComponent(sprite, offset_x, offset_y, width, height);
+}
+
 void Bullet::update()
 {
 	this->sword_wave.move(direction * speed, 0.f);

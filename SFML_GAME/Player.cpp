@@ -24,7 +24,7 @@ Player::Player(float x , float y , sf::Texture& texture_sheet)
 	
 	this->setPosition(x, y);
 
-	this->createHitboxComponent(this->sprite,84.f,40.f,66.f,90.f);
+	this->createHitboxComponent(this->sprite,84.f,30.f,66.f,90.f);
 	this->createMovementComponent(350.f, 1500.f, 500.f);
 	this->createAnimationComponent( texture_sheet);
 	this->createAttributeComponent(1);
@@ -159,11 +159,7 @@ void Player::update(const float& dt)
 		
 }
 
-void Player::jump()
-{
 
-	this->movementcomponent->jump(this->jump_high);
-}
 
 void Player::render(sf::RenderTarget& target)
 {

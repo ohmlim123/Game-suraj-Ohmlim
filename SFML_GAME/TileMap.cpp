@@ -154,7 +154,6 @@ void TileMap::addTile(const int  x, const  int y ,const int z,const sf::IntRect&
 			this->map[x][y][z].push_back (new Tile(x , y , this->gridSizeF,this->tileSheet,texture_rect,collision,type));
 			std::cout << "DEBUG for create Tile!! \n";
 		
-		
 	}
 }
 
@@ -425,8 +424,9 @@ void TileMap::update_normal_tile(const float& dt, Entity* entity, sf::FloatRect 
 	{
 		entity->stopVelocityY();
 		entity->setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
+		
 		entity->set_can_jump(true);
-		entity->set_gravity(0.f);
+		
 
 
 	}
@@ -482,15 +482,12 @@ void TileMap::update_jump_tile(const float& dt, Entity* entity, sf::FloatRect pl
 	{
 		entity->stopVelocityY();
 		entity->setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
-		entity->bounce(0.f, -1.f, 0.f, entity->get_jump_height() * 2.f, dt);
-		entity->set_can_jump(true);
-		
+		entity->bounce(0.f, -1.f, 0.f, entity->get_jump_height() * 2.25f, dt);
+		entity->set_can_jump(false);
+
 
 
 	}
-
-	//Walk Space
-
 
 	//Top collision
 	else if (playerBounds.top > wallBounds.top
@@ -592,6 +589,32 @@ void TileMap::render(sf::RenderTarget& target,const sf::Vector2i& gridPosition)
 					}
 				}
 				
+
+			}
+		}
+
+		for (int x = fromX; x < this->toX; x++)
+		{
+			for (int y = fromY; y < this->toY; y++)
+			{
+				for (size_t k = 0; k < this->map[x][y][this->layer].size(); k++)
+				{
+					if (this->map[x][y][this->layer][k]->getType() == TileTypes::JUMP_HIGH)
+					{
+						this->defferedRenderStack.push(this->map[x][y][this->layer][k]);
+					}
+					else
+					{
+						this->map[x][y][this->layer][k]->render(target);
+					}
+
+					if (this->map[x][y][this->layer][k]->getCollision())
+					{
+						this->collisionBox.setPosition(this->map[x][y][this->layer][k]->getPosition());
+						target.draw(this->collisionBox);
+					}
+				}
+
 
 			}
 		}

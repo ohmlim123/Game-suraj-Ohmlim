@@ -5,7 +5,8 @@ MovementComponent::MovementComponent(sf::Sprite& sprite ,
 	float maxVelocity, float acceleration , float deceleration)
 	: sprite(sprite), maxVelocity(maxVelocity), acceleration(acceleration), deceleration(deceleration)
 {
-	this->gravity = 100.f;
+	//this->gravity = 100.f;
+	
 }
 
 MovementComponent::~MovementComponent()
@@ -110,9 +111,9 @@ void MovementComponent::updategravity()
 	this->velocity.y += gravity;
 }
 
-void MovementComponent::jump(float jump_high)
+void MovementComponent::jump(float jump_height)
 {
-	this->velocity.y -= jump_high;
+	this->velocity.y -= jump_height;
 }
 
 void MovementComponent::bounce(const float dir_x, const float dir_y, const float x_force, const float y_force, const float& dt)
@@ -178,7 +179,7 @@ void MovementComponent::update(const float& dt)
 		if (this->velocity.x > 0.f)
 			this->velocity.x = 0.f;
 	}
-	if (this->velocity.y > 0.f)//Check for positive y
+	/*if (this->velocity.y > 0.f)//Check for positive y
 	{
 		//Max Velocity check positive
 		if (this->velocity.y > this->maxVelocity)
@@ -202,7 +203,7 @@ void MovementComponent::update(const float& dt)
 		this->velocity.y += deceleration * dt;
 		if (this->velocity.y > 0.f)
 			this->velocity.y = 0.f;
-	}
+	}*/
 
 	//Gravity
 	this->updategravity();
