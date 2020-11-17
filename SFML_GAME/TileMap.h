@@ -70,6 +70,7 @@ public:
 	void update_healing_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
 	void update_jump_high_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
 	void update_jump_low_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
+	void update_speed_down_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
 
 	void update();
 	void render(sf::RenderTarget& target,const sf::Vector2i& gridPosition);

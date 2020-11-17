@@ -65,6 +65,8 @@ public:
 	virtual void move(const float x, const float y, const float& dt);
 	virtual void stopVelocity();
 	virtual void stopVelocityX();
+	virtual void speedup();
+	virtual void speeddown();
 	virtual void stopVelocityY();
 	const bool  get_can_jump();
 	void set_can_jump(bool Getcanjump);

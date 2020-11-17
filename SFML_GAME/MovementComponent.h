@@ -43,6 +43,8 @@ public:
 	const bool getState(const short unsigned state) const;
 	void stopVelocity();
 	void stopVelocityX();
+	void speedup();
+	void speeddown();
 	void stopVelocityY();
 	void updategravity();
 	void jump(float jump_height);

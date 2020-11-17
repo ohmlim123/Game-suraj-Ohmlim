@@ -9,6 +9,7 @@ enum TileTypes {
 	DOODAD = 3,
 	DAMAGING = 4,
 	HEALING = 5,
+	SPEEDDOWN = 6
 	};
 
 

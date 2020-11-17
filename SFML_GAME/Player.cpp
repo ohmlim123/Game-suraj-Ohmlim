@@ -7,34 +7,34 @@ void Player::initVariables()
 	this->attacking = false;
 	this->sprite.setOrigin(115.f, 0.f);
 	this->sprite.setScale(-2.f, 2.f);
-	
+
 }
 
 void Player::initComponents()
 {
-	
+
 }
 
 
 //Contructor / Destructor
-Player::Player(float x , float y , sf::Texture& texture_sheet)
+Player::Player(float x, float y, sf::Texture& texture_sheet)
 {
 	this->initVariables();
-	
 
-	
+
+
 	this->setPosition(x, y);
 
-	this->createHitboxComponent(this->sprite,84.f,30.f,66.f,90.f);
+	this->createHitboxComponent(this->sprite, 84.f, 30.f, 66.f, 90.f);
 	this->createMovementComponent(350.f, 1500.f, 500.f);
-	this->createAnimationComponent( texture_sheet);
+	this->createAnimationComponent(texture_sheet);
 	this->createAttributeComponent(1);
 
-	this->animationComponent->addAnimation("IDLE", 10.f, 0, 0, 0, 0, 84,66);
+	this->animationComponent->addAnimation("IDLE", 10.f, 0, 0, 0, 0, 84, 66);
 	this->animationComponent->addAnimation("WALK", 8.f, 0, 1, 7, 1, 84, 66);
-	this->animationComponent->addAnimation("ATTACK", 9.f, 0,  3, 5, 3,112, 66);
-	
-	
+	this->animationComponent->addAnimation("ATTACK", 9.f, 0, 3, 5, 3, 112, 66);
+
+
 }
 
 Player::~Player()
@@ -52,7 +52,7 @@ void Player::loseHP(const int hp)
 {
 	this->attributeComponent->hp -= hp;
 
-	if(this->attributeComponent->hp < 0)
+	if (this->attributeComponent->hp < 0)
 		this->attributeComponent->hp = 0;
 }
 
@@ -74,7 +74,7 @@ void Player::loseEXP(const int exp)
 
 void Player::gainEXP(const int exp)
 {
-	
+
 
 	this->attributeComponent->gainExp(exp);
 }
@@ -146,18 +146,18 @@ void Player::updateAnimation(const float& dt)
 }
 void Player::update(const float& dt)
 {
-	
-	
-		this->movementcomponent->update(dt);
 
-		this->updateAttack();
 
-		this->updateAnimation(dt);
-		
-		
+	this->movementcomponent->update(dt);
 
-		this->hitboxComponent->update();
-		
+	this->updateAttack();
+
+	this->updateAnimation(dt);
+
+
+
+	this->hitboxComponent->update();
+
 }
 
 
@@ -166,6 +166,6 @@ void Player::render(sf::RenderTarget& target)
 {
 	target.draw(this->sprite);
 
-	
-		this->hitboxComponent->render(target);
+
+	this->hitboxComponent->render(target);
 }

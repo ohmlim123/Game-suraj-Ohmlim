@@ -135,6 +135,18 @@ void Entity::stopVelocityX()
 		this->movementcomponent->stopVelocityX();
 }
 
+void Entity::speedup()
+{
+	if (this->movementcomponent)
+		this->movementcomponent->speedup();
+}
+
+void Entity::speeddown()
+{
+	if (this->movementcomponent)
+		this->movementcomponent->speeddown();
+}
+
 void Entity::stopVelocityY()
 {
 	if (this->movementcomponent)
