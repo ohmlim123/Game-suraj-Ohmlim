@@ -399,7 +399,13 @@ void TileMap::updateCollision(Entity* entity , const float& dt)
 							this->update_normal_tile(dt, entity, playerBounds, wallBounds);
 							break;
 						case TileTypes::JUMP_HIGH:
-							this->update_jump_tile(dt, entity, playerBounds, wallBounds);
+							this->update_jump_high_tile(dt, entity, playerBounds, wallBounds);
+							break;
+						case TileTypes::JUMP_LOW:
+							this->update_jump_low_tile(dt, entity, playerBounds, wallBounds);
+							break;
+						case TileTypes::DAMAGING:
+							this->update_attack_tile(dt, entity, playerBounds, wallBounds);
 							break;
 						}
 				    }
@@ -471,7 +477,7 @@ void TileMap::update_normal_tile(const float& dt, Entity* entity, sf::FloatRect 
 	}
 }
 
-void TileMap::update_jump_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds)
+void TileMap::update_attack_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds)
 {
 	//Bottom Collision
 	if (playerBounds.top < wallBounds.top
@@ -482,8 +488,73 @@ void TileMap::update_jump_tile(const float& dt, Entity* entity, sf::FloatRect pl
 	{
 		entity->stopVelocityY();
 		entity->setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
-		entity->bounce(0.f, -1.f, 0.f, entity->get_jump_height() * 2.25f, dt);
+		entity->loseHP(1);
+	}
+
+	//Walk Space
+
+
+	//Top collision
+	else if (playerBounds.top > wallBounds.top
+		&& playerBounds.top + playerBounds.height > wallBounds.top + wallBounds.height
+		&& playerBounds.left <  wallBounds.left + wallBounds.width - 1
+		&& playerBounds.left + playerBounds.width > wallBounds.left + 1
+		)
+	{
+
+		entity->stopVelocityY();
+		entity->setPosition(playerBounds.left, wallBounds.top + wallBounds.height);
+		entity->loseHP(1);
+		
+
+
+	}
+
+	//Right collision
+	if (playerBounds.left < wallBounds.left
+		&& playerBounds.left + playerBounds.width < wallBounds.left + wallBounds.width
+		&& playerBounds.top <  wallBounds.top + wallBounds.height - 1
+		&& playerBounds.top + playerBounds.height > wallBounds.top + 1
+		)
+	{
+		entity->stopVelocityX();
+		entity->setPosition(wallBounds.left - playerBounds.width, playerBounds.top);
+
+		entity->loseHP(1);
+		
+
+	}
+
+	//Left collision
+	else if (playerBounds.left > wallBounds.left
+		&& playerBounds.left + playerBounds.width > wallBounds.left + wallBounds.width
+		&& playerBounds.top <  wallBounds.top + wallBounds.height - 1
+		&& playerBounds.top + playerBounds.height > wallBounds.top + 1
+		)
+	{
+		entity->stopVelocityX();
+		entity->setPosition(wallBounds.left + wallBounds.width, playerBounds.top);
+		
+		
+		entity->loseHP(1);
+		
+	}
+}
+
+void TileMap::update_jump_high_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds)
+{
+	//Bottom Collision
+	if (playerBounds.top < wallBounds.top
+		&& playerBounds.top + playerBounds.height < wallBounds.top + wallBounds.height
+		&& playerBounds.left <  wallBounds.left + wallBounds.width - 1
+		&& playerBounds.left + playerBounds.width > wallBounds.left + 1
+		)
+	{
+		entity->stopVelocityY();
+		entity->setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
+		entity->bounce(0.f, -1.f, 0.f, entity->get_jump_height() * 3.f, dt);
 		entity->set_can_jump(false);
+		
 
 
 
@@ -527,6 +598,61 @@ void TileMap::update_jump_tile(const float& dt, Entity* entity, sf::FloatRect pl
 
 }
 
+void TileMap::update_jump_low_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds)
+{
+	//Bottom Collision
+	if (playerBounds.top < wallBounds.top
+		&& playerBounds.top + playerBounds.height < wallBounds.top + wallBounds.height
+		&& playerBounds.left <  wallBounds.left + wallBounds.width - 1
+		&& playerBounds.left + playerBounds.width > wallBounds.left + 1
+		)
+	{
+		entity->stopVelocityY();
+		entity->setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
+		entity->bounce(0.f, -1.f, 0.f, entity->get_jump_height() * 1.3f, dt);
+		entity->set_can_jump(false);
+
+
+
+	}
+
+	//Top collision
+	else if (playerBounds.top > wallBounds.top
+		&& playerBounds.top + playerBounds.height > wallBounds.top + wallBounds.height
+		&& playerBounds.left <  wallBounds.left + wallBounds.width - 1
+		&& playerBounds.left + playerBounds.width > wallBounds.left + 1
+		)
+	{
+
+		entity->stopVelocityY();
+		entity->setPosition(playerBounds.left, wallBounds.top + wallBounds.height);
+
+	}
+
+	//Right collision
+	if (playerBounds.left < wallBounds.left
+		&& playerBounds.left + playerBounds.width < wallBounds.left + wallBounds.width
+		&& playerBounds.top <  wallBounds.top + wallBounds.height - 1
+		&& playerBounds.top + playerBounds.height > wallBounds.top + 1
+		)
+	{
+		entity->stopVelocityX();
+		entity->setPosition(wallBounds.left - playerBounds.width, playerBounds.top);
+
+	}
+
+	//Left collision
+	else if (playerBounds.left > wallBounds.left
+		&& playerBounds.left + playerBounds.width > wallBounds.left + wallBounds.width
+		&& playerBounds.top <  wallBounds.top + wallBounds.height - 1
+		&& playerBounds.top + playerBounds.height > wallBounds.top + 1
+		)
+	{
+		entity->stopVelocityX();
+		entity->setPosition(wallBounds.left + wallBounds.width, playerBounds.top);
+	}
+}
+
 void TileMap::update()
 {
 
@@ -566,6 +692,7 @@ void TileMap::render(sf::RenderTarget& target,const sf::Vector2i& gridPosition)
 		else if (this->toY > this->maxSizeWorldGrid.y)
 			this->toY = this->maxSizeWorldGrid.y;
 
+		//Invisible Block
 
 		for (int x = fromX; x < this->toX; x++)
 		{
@@ -593,6 +720,7 @@ void TileMap::render(sf::RenderTarget& target,const sf::Vector2i& gridPosition)
 			}
 		}
 
+		//JumpHigh Block
 		for (int x = fromX; x < this->toX; x++)
 		{
 			for (int y = fromY; y < this->toY; y++)
@@ -600,6 +728,33 @@ void TileMap::render(sf::RenderTarget& target,const sf::Vector2i& gridPosition)
 				for (size_t k = 0; k < this->map[x][y][this->layer].size(); k++)
 				{
 					if (this->map[x][y][this->layer][k]->getType() == TileTypes::JUMP_HIGH)
+					{
+						this->defferedRenderStack.push(this->map[x][y][this->layer][k]);
+					}
+					else
+					{
+						this->map[x][y][this->layer][k]->render(target);
+					}
+
+					if (this->map[x][y][this->layer][k]->getCollision())
+					{
+						this->collisionBox.setPosition(this->map[x][y][this->layer][k]->getPosition());
+						target.draw(this->collisionBox);
+					}
+				}
+
+
+			}
+		}
+
+		//JumpLow Block
+		for (int x = fromX; x < this->toX; x++)
+		{
+			for (int y = fromY; y < this->toY; y++)
+			{
+				for (size_t k = 0; k < this->map[x][y][this->layer].size(); k++)
+				{
+					if (this->map[x][y][this->layer][k]->getType() == TileTypes::JUMP_LOW)
 					{
 						this->defferedRenderStack.push(this->map[x][y][this->layer][k]);
 					}

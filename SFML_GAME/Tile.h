@@ -3,10 +3,12 @@
 
 
 enum TileTypes {
-	DEFAULT = 0, 
-	DAMAGING,
+	DEFAULT = 0,
+	JUMP_HIGH,
+	JUMP_LOW,
 	DOODAD,
-	JUMP_HIGH};
+	DAMAGING
+	};
 
 
 class Tile

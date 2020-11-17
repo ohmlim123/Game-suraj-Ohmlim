@@ -9,7 +9,8 @@ void Entity::iniVarialbe()
 	this->skillComponent = NULL;
 	this->Can_jump = false;
 
-	this->jump_height = 550.f;
+	this->jump_height = 450.f;
+	this->bounce_distance = 100.f;
 
 }
 Entity::Entity()
@@ -163,6 +164,24 @@ const float Entity::get_gravity()
 void Entity::set_gravity(float gravitate)
 {
 	this->movementcomponent->set_gravity(gravitate);
+}
+
+
+
+void Entity::loseHP(const int hp)
+{
+	this->attributeComponent->hp -= hp;
+
+	if (this->attributeComponent->hp < 0)
+		this->attributeComponent->hp = 0;
+}
+
+void Entity::gainHP(const int hp)
+{
+	this->attributeComponent->hp += hp;
+
+	if (this->attributeComponent->hp > this->attributeComponent->hpMax)
+		this->attributeComponent->hp = this->attributeComponent->hpMax;
 }
 
 void Entity::jump(float jump_height)

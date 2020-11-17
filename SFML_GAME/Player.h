@@ -7,6 +7,8 @@ class Entity;
 
 
 class Player :
+
+
     public Entity
 {
 private:

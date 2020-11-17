@@ -7,6 +7,7 @@ void Player::initVariables()
 	this->attacking = false;
 	this->sprite.setOrigin(115.f, 0.f);
 	this->sprite.setScale(-2.f, 2.f);
+	
 }
 
 void Player::initComponents()

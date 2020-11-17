@@ -31,6 +31,7 @@ protected:
 
 	bool Can_jump;
 	float jump_height;
+	
 
 public:
 
@@ -69,6 +70,10 @@ public:
 	const float get_jump_height() const;
 	const float get_gravity();
 	void set_gravity(float gravitate);
+	
+
+	void loseHP(const int hp);
+	void gainHP(const int hp);
 
 	void jump(float jump_height);
 	void bounce(const float dir_x, const float dir_y, const float x_force, const float y_force, const float& dt);

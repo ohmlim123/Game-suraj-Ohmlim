@@ -28,6 +28,9 @@ private:
 	sf::Texture tileSheet;
 	sf::RectangleShape collisionBox;
 
+
+	//
+
 	//Culling
 
 	int fromX;
@@ -59,8 +62,12 @@ public:
 	void loadFromFile(const std::string file_name);
 
 	void updateCollision(Entity* entity, const float& dt);
+
+	//Type of Tile
 	void update_normal_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
-	void update_jump_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
+	void update_attack_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
+	void update_jump_high_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
+	void update_jump_low_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
 
 	void update();
 	void render(sf::RenderTarget& target,const sf::Vector2i& gridPosition);

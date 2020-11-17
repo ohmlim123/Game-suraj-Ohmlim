@@ -7,7 +7,7 @@ void EditorState::initVariables()
 	this->textureRect = sf::IntRect(0,0,static_cast<int>(this->stateData->gridSize), static_cast<int>(this->stateData->gridSize));
 	this->collision = false;
 	this->type = TileTypes::DEFAULT;
-	this->cameraSpeed = 500.f;
+	this->cameraSpeed = 900.f;
 	this->layer = 0;
 	this->tileAddLock = false;
 
@@ -118,7 +118,7 @@ void EditorState::initGui()
 	this->selectorRect.setTextureRect(this->textureRect);
 
 	this->textureSelector = new gui::TextureSelector(
-		20.f, 20.f, 500.f, 500.f,
+		20.f, 20.f, 500.f, 1000.f,
 		this->stateData->gridSize, this->tileMap->getTileSheet(),
 		this->font,"X"
 	);

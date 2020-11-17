@@ -95,7 +95,7 @@ void GameState::initShader()
 
 void GameState::initPlayers()
 {
-	this->player = new Player(0, 0, this->textures["PLAYER_SHEET"]);
+	this->player = new Player(450, 2650, this->textures["PLAYER_SHEET"]);
 }
 
 void GameState::initPlayerGui()
@@ -346,7 +346,7 @@ void GameState::render(sf::RenderTarget* target)
 		//Final Render
 
 		this->renderTexture.display();
-		//this->renderSprite.setTexture(this->renderTexture.getTexture());
+		this->renderSprite.setTexture(this->renderTexture.getTexture());
 		target->draw(this->renderSprite);
 
 }
