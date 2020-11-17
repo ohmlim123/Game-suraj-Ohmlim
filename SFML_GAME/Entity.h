@@ -21,6 +21,7 @@ private:
 protected:
 	
 	sf::Sprite sprite;
+	sf::Clock Hp_timer;
 
 	HitboxComponent* hitboxComponent;
 	MovementComponent* movementcomponent;

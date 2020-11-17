@@ -92,7 +92,7 @@ void EditorState::initPauseMenu()
 
 	this->pmenu->addButton("QUIT", gui::p2pY(74.f, vm), gui::p2pX(13.f, vm), gui::p2pY(6.f, vm),gui::calCharSize(vm), "Quit");
 	this->pmenu->addButton("SAVE", gui::p2pY(64.8f, vm), gui::p2pX(13.f, vm), gui::p2pY(6.f, vm), gui::calCharSize(vm), "Save");
-	this->pmenu->addButton("LOAD", gui::p2pY(55.5f,vm), gui::p2pX(13.f, vm), gui::p2pY(6.f, vm), gui::calCharSize(vm), "Load");
+	this->pmenu->addButton("LOAD", gui::p2pY(35.5f,vm), gui::p2pX(13.f, vm), gui::p2pY(6.f, vm), gui::calCharSize(vm), "Load");
 }
 
 
@@ -129,7 +129,7 @@ void EditorState::initGui()
 void EditorState::initTileMap()
 {
 	this->tileMap = new TileMap(this->stateData->gridSize, 100, 100,
-		"Resources/Images/Tile/tilemap5.png"
+		"Resources/Images/Tile/Map_natural.png"
 	);
 }
 

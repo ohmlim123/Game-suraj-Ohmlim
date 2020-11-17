@@ -9,8 +9,8 @@ void Entity::iniVarialbe()
 	this->skillComponent = NULL;
 	this->Can_jump = false;
 
-	this->jump_height = 450.f;
-	this->bounce_distance = 100.f;
+	this->jump_height = 500.f;
+	//this->bounce_distance = 100.f;
 
 }
 Entity::Entity()

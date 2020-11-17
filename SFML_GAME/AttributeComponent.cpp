@@ -49,7 +49,7 @@ void AttributeComponent::gainExp(const int exp)
 
 void AttributeComponent::updateStats(const bool reset)
 {
-	this->hpMax			= this->vitality * 5 + this->vitality + this->strength + this->intelligence / 5;
+	this->hpMax			= 1000;
 	this->damageMin		= this->strength * 2 + this->strength / 4 + this->intelligence / 5;
 	this->damageMax		= this->strength * 2 + this->strength / 2 + this->intelligence / 5;
 	this->accuracy		= this->dexterity * 4 + this->dexterity / 3 + this->intelligence / 5;

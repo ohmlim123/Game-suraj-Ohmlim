@@ -141,6 +141,7 @@ void SelectState::updateGui(const float& dt)
 	{
 		it.second->update(this->mousePosWindow);
 	}
+
 	if (this->buttons["LEVEL1"]->isPressed())
 	{
 		this->states->push(new GameState(this->stateData,1));

@@ -35,6 +35,8 @@ private:
 	sf::Vector2i viewGridPosition;
 	sf::RenderTexture renderTexture;
 	sf::Sprite renderSprite;
+	sf::Texture backgroundTexture;
+	sf::RectangleShape background;
 	
 	sf::Font font;
 	PauseMenu* pmenu;
@@ -50,7 +52,9 @@ private:
 	TileMap* tileMap;
 
 	//Fanction
+	
 	void initDefferedRender();
+	void initbackground();
 	void initView();
 	void initKeybinds();
 	void initFonts();

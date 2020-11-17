@@ -21,6 +21,7 @@ private:
 	int gridSizeI;
 	sf::Vector2i maxSizeWorldGrid;
 	sf::Vector2f maxSizeWorldF;
+	sf::Clock Hp_timer;
 	int layers;
 	std::vector< std::vector< std::vector< std::vector<Tile*> > > > map;
 	std::stack <Tile*> defferedRenderStack;
@@ -66,6 +67,7 @@ public:
 	//Type of Tile
 	void update_normal_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
 	void update_attack_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
+	void update_healing_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
 	void update_jump_high_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
 	void update_jump_low_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
 

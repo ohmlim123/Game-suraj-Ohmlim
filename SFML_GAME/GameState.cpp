@@ -22,6 +22,11 @@ void GameState::initDefferedRender()
 		this->stateData->gfxSettings->resolution.height));
 }
 
+void GameState::initbackground()
+{
+	
+}
+
 void GameState::initView()
 {
 	this->view.setSize(
@@ -95,7 +100,7 @@ void GameState::initShader()
 
 void GameState::initPlayers()
 {
-	this->player = new Player(450, 2650, this->textures["PLAYER_SHEET"]);
+	this->player = new Player(550, 2600, this->textures["PLAYER_SHEET"]);
 }
 
 void GameState::initPlayerGui()
@@ -312,6 +317,7 @@ void GameState::render(sf::RenderTarget* target)
 	if (!target)
 		target = this->window;
 
+	
 
 	this->renderTexture.clear();
 
@@ -335,6 +341,7 @@ void GameState::render(sf::RenderTarget* target)
 		this->renderTexture.setView(this->renderTexture.getDefaultView());
 		this->playerGui->render(this->renderTexture);
 		
+		target->draw(this->background);
 
 		//Render GUI
 		if (this->paused) // Puase maenu render
@@ -345,6 +352,7 @@ void GameState::render(sf::RenderTarget* target)
 	
 		//Final Render
 
+		
 		this->renderTexture.display();
 		this->renderSprite.setTexture(this->renderTexture.getTexture());
 		target->draw(this->renderSprite);

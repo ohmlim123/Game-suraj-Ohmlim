@@ -4,10 +4,11 @@
 
 enum TileTypes {
 	DEFAULT = 0,
-	JUMP_HIGH,
-	JUMP_LOW,
-	DOODAD,
-	DAMAGING
+	JUMP_HIGH = 1,
+	JUMP_LOW = 2,
+	DOODAD = 3,
+	DAMAGING = 4,
+	HEALING = 5,
 	};
 
 
