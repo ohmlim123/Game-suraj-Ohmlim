@@ -30,9 +30,10 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 	this->createAnimationComponent(texture_sheet);
 	this->createAttributeComponent(1);
 
-	this->animationComponent->addAnimation("IDLE", 10.f, 0, 0, 0, 0, 84, 66);
-	this->animationComponent->addAnimation("WALK", 8.f, 0, 1, 7, 1, 84, 66);
+	this->animationComponent->addAnimation("IDLE", 10.f, 1, 0, 1, 0, 84, 66);
+	this->animationComponent->addAnimation("WALK", 6.f, 1, 1, 7, 1, 84, 66);
 	this->animationComponent->addAnimation("ATTACK", 9.f, 0, 3, 5, 3, 112, 66);
+	this->animationComponent->addAnimation("JUMP",10.f,0,2,7,2,84,66);
 
 
 }
@@ -142,6 +143,11 @@ void Player::updateAnimation(const float& dt)
 			this->sprite.setScale(-2.f, 2.f);
 		}
 		this->animationComponent->play("WALK", dt, this->movementcomponent->getVelocity().x, this->movementcomponent->getMaxVelocity());
+	}
+
+	else if (this->movementcomponent->getState(JUMP))
+	{
+		this->animationComponent->play("JUMP", dt);
 	}
 }
 void Player::update(const float& dt)

@@ -24,7 +24,18 @@ void GameState::initDefferedRender()
 
 void GameState::initbackground()
 {
+	const sf::VideoMode& vm = this->stateData->gfxSettings->resolution;
 
+	//BackGround
+	this->background.setSize(
+		sf::Vector2f(
+			static_cast<float>(vm.width),
+			static_cast<float>(vm.height)));
+
+	this->backgroundTexture.loadFromFile("Resources/Images/background/forest1.png");
+
+
+	this->background.setTexture(&this->backgroundTexture);
 }
 
 void GameState::initView()
@@ -101,6 +112,7 @@ void GameState::initShader()
 void GameState::initPlayers()
 {
 	this->player = new Player(550, 2600, this->textures["PLAYER_SHEET"]);
+	//this->player = new Player(0, 0, this->textures["PLAYER_SHEET"]);
 }
 
 void GameState::initPlayerGui()
@@ -142,6 +154,8 @@ GameState::GameState(StateData* state_data, int stage_number)
 		this->initTileMap("Map_1.slmp");
 	}
 
+	this->test_enemy = new Enemy(200, 200, this->textures["PLAYER_SHEET"]);
+
 
 
 }
@@ -151,6 +165,8 @@ GameState::~GameState()
 	delete this->player;
 	delete this->playerGui;
 	delete this->tileMap;
+
+	delete this->test_enemy;
 }
 
 
@@ -234,7 +250,7 @@ void GameState::updatePlayerInput(const float& dt)
 		this->player->set_can_jump(false);
 
 
-		//this->player->set_gravity(0.f);
+		this->player->set_gravity(0.f);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K) && bullet_timer >= 50.f)
@@ -265,6 +281,7 @@ void GameState::updateTileMap(const float& dt)
 {
 	this->tileMap->update();
 	this->tileMap->updateCollision(this->player, dt);
+	this->tileMap->updateCollision(this->test_enemy, dt);
 }
 
 void GameState::update(const float& dt)
@@ -303,6 +320,9 @@ void GameState::update(const float& dt)
 
 		this->playerGui->update(dt);
 
+		this->test_enemy->update(dt);
+		this->test_enemy->move(1.f, 0.f, dt);
+
 
 	}
 	else // Puased update
@@ -336,7 +356,11 @@ void GameState::render(sf::RenderTarget* target)
 		this->bullets[i]->render(this->renderTexture);
 	}
 
+	this->test_enemy->render(this->renderTexture);
+
 	this->tileMap->renderDefferred(this->renderTexture);
+
+	
 
 	this->renderTexture.setView(this->renderTexture.getDefaultView());
 	this->playerGui->render(this->renderTexture);

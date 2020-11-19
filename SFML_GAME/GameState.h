@@ -5,8 +5,10 @@
 #include "State.h"
 #include"PauseMenu.h"
 #include"TileMap.h"
+#include"Enemy.h"
 #include"PlayerGui.h"
 #include"Bullet.h"
+
 
 
 
@@ -15,6 +17,7 @@ class PauseMenu;
 class Player;
 class PlayerGui;
 class TileMap;
+class Enemy;
 class sf::View;
 class sf::Font;
 class sf::RenderTexture;
@@ -46,6 +49,8 @@ private:
 	Player* player;
 	PlayerGui* playerGui;
 	sf::Texture texture;
+
+	Enemy* test_enemy;
 
 	std::vector<Bullet*> bullets;
 

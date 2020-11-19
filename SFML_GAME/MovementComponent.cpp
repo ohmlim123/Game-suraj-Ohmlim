@@ -5,7 +5,7 @@ MovementComponent::MovementComponent(sf::Sprite& sprite ,
 	float maxVelocity, float acceleration , float deceleration)
 	: sprite(sprite), maxVelocity(maxVelocity), acceleration(acceleration), deceleration(deceleration)
 {
-	//this->gravity = 100.f;
+	
 	
 }
 
@@ -78,6 +78,12 @@ const bool MovementComponent::getState(const short unsigned state) const
 
 		
 
+		break;
+	case JUMP:
+		if (this->velocity.y < 0.f )
+		{
+			return true;
+		}
 		break;
 
 	}
