@@ -9,7 +9,9 @@ enum TileTypes {
 	DOODAD = 3,
 	DAMAGING = 4,
 	HEALING = 5,
-	SPEEDDOWN = 6
+	SPEEDDOWN = 6,
+	SPEEDUP = 7,
+	JUMP_VERY_HIGH = 8
 	};
 
 

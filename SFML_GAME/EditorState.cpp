@@ -34,7 +34,7 @@ void EditorState::initBackground()
 			static_cast<float>(vm.width),
 			static_cast<float>(vm.height)));
 
-	this->backgroundTexture.loadFromFile("Resources/Images/background/blue.png");
+	this->backgroundTexture.loadFromFile("Resources/Images/background/forest1.png");
 
 
 	this->background.setTexture(&this->backgroundTexture);

@@ -413,6 +413,12 @@ void TileMap::updateCollision(Entity* entity , const float& dt)
 						case TileTypes::SPEEDDOWN:
 							this->update_speed_down_tile(dt, entity, playerBounds, wallBounds);
 							break;
+						case TileTypes::SPEEDUP:
+							this->update_speed_up_tile(dt, entity, playerBounds, wallBounds);
+							break;
+						case TileTypes::JUMP_VERY_HIGH:
+							this->update_jump_very_high_tile(dt, entity, playerBounds, wallBounds);
+							break;
 						}
 				    }
 					
@@ -738,7 +744,7 @@ void TileMap::update_jump_low_tile(const float& dt, Entity* entity, sf::FloatRec
 	{
 		entity->stopVelocityY();
 		entity->setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
-		entity->bounce(0.f, -1.f, 0.f, entity->get_jump_height() * 1.65f, dt);
+		entity->bounce(0.f, -1.f, 0.f, entity->get_jump_height() * 2.f, dt);
 		entity->set_can_jump(false);
 
 
@@ -835,6 +841,115 @@ void TileMap::update_speed_down_tile(const float& dt, Entity* entity, sf::FloatR
 		entity->stopVelocityX();
 		entity->setPosition(wallBounds.left + wallBounds.width, playerBounds.top);
 	}
+}
+
+void TileMap::update_speed_up_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds)
+{
+	//Bottom Collision
+	if (playerBounds.top < wallBounds.top
+		&& playerBounds.top + playerBounds.height < wallBounds.top + wallBounds.height
+		&& playerBounds.left <  wallBounds.left + wallBounds.width - 1
+		&& playerBounds.left + playerBounds.width > wallBounds.left + 1
+		)
+	{
+		//entity->createMovementComponent(1000.f, 1500.f, 500.f);
+		entity->stopVelocityY();
+		entity->setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
+		entity->speedup();
+
+
+
+
+	}
+
+	//Top collision
+	else if (playerBounds.top > wallBounds.top
+		&& playerBounds.top + playerBounds.height > wallBounds.top + wallBounds.height
+		&& playerBounds.left <  wallBounds.left + wallBounds.width - 1
+		&& playerBounds.left + playerBounds.width > wallBounds.left + 1
+		)
+	{
+
+		entity->stopVelocityY();
+		entity->setPosition(playerBounds.left, wallBounds.top + wallBounds.height);
+
+	}
+
+	//Right collision
+	if (playerBounds.left < wallBounds.left
+		&& playerBounds.left + playerBounds.width < wallBounds.left + wallBounds.width
+		&& playerBounds.top <  wallBounds.top + wallBounds.height - 1
+		&& playerBounds.top + playerBounds.height > wallBounds.top + 1
+		)
+	{
+		entity->stopVelocityX();
+		entity->setPosition(wallBounds.left - playerBounds.width, playerBounds.top);
+
+	}
+
+	//Left collision
+	else if (playerBounds.left > wallBounds.left
+		&& playerBounds.left + playerBounds.width > wallBounds.left + wallBounds.width
+		&& playerBounds.top <  wallBounds.top + wallBounds.height - 1
+		&& playerBounds.top + playerBounds.height > wallBounds.top + 1
+		)
+	{
+		entity->stopVelocityX();
+		entity->setPosition(wallBounds.left + wallBounds.width, playerBounds.top);
+	}
+}
+
+void TileMap::update_jump_very_high_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds)
+{
+	//Bottom Collision
+	if (playerBounds.top < wallBounds.top
+		&& playerBounds.top + playerBounds.height < wallBounds.top + wallBounds.height
+		&& playerBounds.left <  wallBounds.left + wallBounds.width - 1
+		&& playerBounds.left + playerBounds.width > wallBounds.left + 1
+		)
+	{
+		entity->stopVelocityY();
+		entity->setPosition(playerBounds.left, wallBounds.top - playerBounds.height);
+		entity->bounce(0.f, -1.f, 0.f, entity->get_jump_height() * 4.f, dt);
+		entity->set_can_jump(false);
+	}
+
+	//Top collision
+	else if (playerBounds.top > wallBounds.top
+		&& playerBounds.top + playerBounds.height > wallBounds.top + wallBounds.height
+		&& playerBounds.left <  wallBounds.left + wallBounds.width - 1
+		&& playerBounds.left + playerBounds.width > wallBounds.left + 1
+		)
+	{
+
+		entity->stopVelocityY();
+		entity->setPosition(playerBounds.left, wallBounds.top + wallBounds.height);
+
+	}
+
+	//Right collision
+	if (playerBounds.left < wallBounds.left
+		&& playerBounds.left + playerBounds.width < wallBounds.left + wallBounds.width
+		&& playerBounds.top <  wallBounds.top + wallBounds.height - 1
+		&& playerBounds.top + playerBounds.height > wallBounds.top + 1
+		)
+	{
+		entity->stopVelocityX();
+		entity->setPosition(wallBounds.left - playerBounds.width, playerBounds.top);
+
+	}
+
+	//Left collision
+	else if (playerBounds.left > wallBounds.left
+		&& playerBounds.left + playerBounds.width > wallBounds.left + wallBounds.width
+		&& playerBounds.top <  wallBounds.top + wallBounds.height - 1
+		&& playerBounds.top + playerBounds.height > wallBounds.top + 1
+		)
+	{
+		entity->stopVelocityX();
+		entity->setPosition(wallBounds.left + wallBounds.width, playerBounds.top);
+	}
+
 }
 
 void TileMap::update()

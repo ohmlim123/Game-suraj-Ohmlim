@@ -101,14 +101,14 @@ void MovementComponent::stopVelocityX()
 
 void MovementComponent::speedup()
 {
-	if (this->velocity.x > this->maxVelocity)
-		this->velocity.x = this->maxVelocity + this->maxVelocity;
+	if (this->velocity.x >= this->maxVelocity / 2)
+		this->velocity.x = this->maxVelocity;
 }
 
 void MovementComponent::speeddown()
 {
-	if (this->velocity.x > this->maxVelocity / 2)
-		this->velocity.x = this->maxVelocity / 2;
+	if (this->velocity.x > this->maxVelocity / 4)
+		this->velocity.x = this->maxVelocity / 4;
 }
 
 void MovementComponent::stopVelocityY()
@@ -169,8 +169,8 @@ void MovementComponent::update(const float& dt)
 	if (this->velocity.x > 0.f)//Check for positive x
 	{
 		//Max Velocity check positive
-		if (this->velocity.x > this->maxVelocity)
-			this->velocity.x = this->maxVelocity;
+		if (this->velocity.x > this->maxVelocity / 2)
+			this->velocity.x = this->maxVelocity  / 2;
 
 		
 		//Deceleration x positive
@@ -183,8 +183,8 @@ void MovementComponent::update(const float& dt)
 	else if(this->velocity.x < 0.f) // Check for negative x
 	{
 		//Max velocity check x negative
-		if (this->velocity.x < -this->maxVelocity)
-			this->velocity.x = -this->maxVelocity;
+		if (this->velocity.x < -this->maxVelocity / 2)
+			this->velocity.x = -this->maxVelocity / 2;
 
 		//Deceleration x negetive
 		this->velocity.x += deceleration * dt;
