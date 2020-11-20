@@ -11,7 +11,8 @@ enum TileTypes {
 	HEALING = 5,
 	SPEEDDOWN = 6,
 	SPEEDUP = 7,
-	JUMP_VERY_HIGH = 8
+	JUMP_VERY_HIGH = 8,
+	ENEMYSPAWNER = 9
 	};
 
 
@@ -45,8 +46,8 @@ public:
 	const std::string getAsString() const;
 
 
-	void update();
-	void render(sf::RenderTarget& target);
+	virtual void update();
+	virtual void render(sf::RenderTarget& target);
 };
 #endif
 

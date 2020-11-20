@@ -22,9 +22,6 @@
     <Filter Include="Entities\Components">
       <UniqueIdentifier>{ec76c6b8-c072-45f7-8144-88887915ccf8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tile">
-      <UniqueIdentifier>{d949b503-6f20-450f-9878-7a49018139b9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GUI">
       <UniqueIdentifier>{0188bc27-cf62-42f6-a07b-85bcf1eccdb8}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,12 @@
     </Filter>
     <Filter Include="Item\RangedWeapon">
       <UniqueIdentifier>{15bbc400-d048-4b31-99be-42c1df2758ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\Tile">
+      <UniqueIdentifier>{d949b503-6f20-450f-9878-7a49018139b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\EditorMode">
+      <UniqueIdentifier>{69dd1656-2254-4d88-9844-08327f7a3ed1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -76,7 +79,7 @@
       <Filter>Entities\Components</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Tile</Filter>
+      <Filter>Map\Tile</Filter>
     </ClCompile>
     <ClCompile Include="PauseMenu.cpp">
       <Filter>GUI</Filter>
@@ -123,6 +126,18 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="EnemySpawner.cpp">
+      <Filter>Map\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorMode.cpp">
+      <Filter>States\EditorMode</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultEditorMode.cpp">
+      <Filter>States\EditorMode</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyEditorMode.cpp">
+      <Filter>States\EditorMode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -156,7 +171,7 @@
       <Filter>Entities\Components</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>Tile</Filter>
+      <Filter>Map\Tile</Filter>
     </ClInclude>
     <ClInclude Include="PauseMenu.h">
       <Filter>GUI</Filter>
@@ -202,6 +217,21 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawner.h">
+      <Filter>Map\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorMode.h">
+      <Filter>States\EditorMode</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultEditorMode.h">
+      <Filter>States\EditorMode</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyEditorMode.h">
+      <Filter>States\EditorMode</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorModes.h">
+      <Filter>States\EditorMode</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

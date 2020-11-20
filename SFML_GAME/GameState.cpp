@@ -94,6 +94,14 @@ void GameState::initTextures()
 	{
 		throw("Error Game State could not load player idle textures");
 	}
+
+	if (this->textures["PINK_FAIRY"].loadFromFile("Resources/Images/Sprite/Enemy/pink_fairy.png"))
+	{
+		std::cout << "NOT ERROR FOR LOAT PINK FAIRY" << "\n";
+	}
+	
+		
+	
 }
 
 void GameState::initPauseMenu()
@@ -154,9 +162,11 @@ GameState::GameState(StateData* state_data, int stage_number)
 		this->initTileMap("Map_1.slmp");
 	}
 
-	this->test_enemy = new Enemy(200, 200, this->textures["PLAYER_SHEET"]);
-
-
+	this->activeEnemies.push_back(new Enemy(550, 2800, this->textures["PINK_FAIRY"]));
+	this->activeEnemies.push_back(new Enemy(650, 2900, this->textures["PINK_FAIRY"]));
+	this->activeEnemies.push_back(new Enemy(750, 3000, this->textures["PINK_FAIRY"]));
+	this->activeEnemies.push_back(new Enemy(850, 3100, this->textures["PINK_FAIRY"]));
+	this->activeEnemies.push_back(new Enemy(950, 3200, this->textures["PINK_FAIRY"]));
 
 }
 GameState::~GameState()
@@ -166,7 +176,12 @@ GameState::~GameState()
 	delete this->playerGui;
 	delete this->tileMap;
 
-	delete this->test_enemy;
+	
+	for (size_t i = 0; i < this->activeEnemies.size(); i++)
+	{
+		delete this->activeEnemies[i];
+	}
+
 }
 
 
@@ -177,9 +192,6 @@ void GameState::updateView(const float& dt)
 		std::floor(this->player->getPosition().x),
 		std::floor(this->player->getPosition().y)
 	);
-
-
-
 
 	if (this->view.getSize().x >= this->view.getSize().x)
 	{
@@ -203,16 +215,8 @@ void GameState::updateView(const float& dt)
 			this->view.setCenter(this->view.getCenter().x, this->tileMap->getMaxSizeF().x - this->view.getSize().y / 2.f);
 		}
 	}
-
-
-
 	this->viewGridPosition.x = static_cast<int>(this->view.getCenter().x) / static_cast<int>(this->stateData->gridSize);
 	this->viewGridPosition.y = static_cast<int>(this->view.getCenter().y) / static_cast<int>(this->stateData->gridSize);
-
-
-
-
-
 }
 
 void GameState::updateInput(const float& dt)
@@ -279,9 +283,14 @@ void GameState::updatePauseMenuButtons()
 
 void GameState::updateTileMap(const float& dt)
 {
-	this->tileMap->update();
-	this->tileMap->updateCollision(this->player, dt);
-	this->tileMap->updateCollision(this->test_enemy, dt);
+	
+	this->tileMap->update(this->player, dt);
+
+	for (auto* i : this->activeEnemies)
+	{
+		this->tileMap->update(i, dt);
+	}
+	
 }
 
 void GameState::update(const float& dt)
@@ -320,8 +329,10 @@ void GameState::update(const float& dt)
 
 		this->playerGui->update(dt);
 
-		this->test_enemy->update(dt);
-		this->test_enemy->move(1.f, 0.f, dt);
+		for (auto* i : this->activeEnemies)
+		{
+			i->update(dt);
+		}
 
 
 	}
@@ -348,7 +359,16 @@ void GameState::render(sf::RenderTarget* target)
 
 	);
 
+	
+
+
 	this->player->render(this->renderTexture);
+
+	for (auto* i : this->activeEnemies)
+	{
+		i->render(this->renderTexture);
+	}
+	
 
 	for (int i = 0;i < bullets.size();i++)
 	{
@@ -356,7 +376,7 @@ void GameState::render(sf::RenderTarget* target)
 		this->bullets[i]->render(this->renderTexture);
 	}
 
-	this->test_enemy->render(this->renderTexture);
+	
 
 	this->tileMap->renderDefferred(this->renderTexture);
 
@@ -365,7 +385,7 @@ void GameState::render(sf::RenderTarget* target)
 	this->renderTexture.setView(this->renderTexture.getDefaultView());
 	this->playerGui->render(this->renderTexture);
 
-	target->draw(this->background);
+	
 
 	//Render GUI
 	if (this->paused) // Puase maenu render

@@ -3,14 +3,15 @@
 
 void Enemy::initVariables()
 {
-	
+	//this->enemySpawner = enemySpawner;
 }
 
 void Enemy::initAnimation()
 {
-	this->animationComponent->addAnimation("IDLE", 10.f, 0, 0, 0, 0, 84, 66);
-	this->animationComponent->addAnimation("WALK", 8.f, 0, 1, 7, 1, 84, 66);
-	this->animationComponent->addAnimation("ATTACK", 9.f, 0, 3, 5, 3, 112, 66);
+	this->animationComponent->addAnimation("IDLE", 25.f, 0, 1, 2, 1 , 65, 84);
+	this->animationComponent->addAnimation("WALK_LEFT", 12.f, 0, 0, 2, 0, 65, 84);
+	this->animationComponent->addAnimation("WALK_RIGHT", 12.f, 0, 2, 2, 2, 65, 84);
+	
 }
 
 
@@ -18,6 +19,7 @@ void Enemy::initAnimation()
 
 //Contructor / Destructor
 Enemy::Enemy(float x, float y, sf::Texture& texture_sheet)
+	
 {
 	this->initVariables();
 
@@ -26,7 +28,7 @@ Enemy::Enemy(float x, float y, sf::Texture& texture_sheet)
 	
 
 	this->createHitboxComponent(this->sprite, 84.f, 30.f, 66.f, 90.f);
-	this->createMovementComponent(700.f, 1500.f, 500.f);
+	this->createMovementComponent(50.f, 1500.f, 500.f);
 	this->createAnimationComponent(texture_sheet);
 	
 

@@ -50,11 +50,13 @@ private:
 	PlayerGui* playerGui;
 	sf::Texture texture;
 
-	Enemy* test_enemy;
+	
 
 	std::vector<Bullet*> bullets;
 
-	TileMap* tileMap;
+	TileMap* tileMap; 
+
+	std::vector<Enemy*> activeEnemies;
 
 	//Fanction
 	

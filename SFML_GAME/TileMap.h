@@ -62,7 +62,7 @@ public:
 	void saveToFile(const std::string file_name);
 	void loadFromFile(const std::string file_name);
 
-	void updateCollision(Entity* entity, const float& dt);
+	void update(Entity* entity, const float& dt);
 
 	//Type of Tile
 	void update_normal_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
@@ -74,7 +74,7 @@ public:
 	void update_speed_up_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
 	void update_jump_very_high_tile(const float& dt, Entity* entity, sf::FloatRect playerBounds, sf::FloatRect wallBounds);
 
-	void update();
+	
 	void render(sf::RenderTarget& target,const sf::Vector2i& gridPosition);
 	void renderDefferred(sf::RenderTarget& target );
 	
